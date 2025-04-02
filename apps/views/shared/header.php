@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="logo.png" alt="Logo" height="40"></a>
+            <a class="navbar-brand" href="/search_helu_frontend/home"><img src="logo.png" alt="Logo" height="40"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,13 +32,15 @@
                             <li><a class="dropdown-item" href="#">Page 2</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">LearnPress Add-Ons</a></li>
+
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link btn btn-primary" href="/search_helu_frontend/account/login">Login</a></li> -->
                 </ul>
-                <form class="d-flex ms-3">
-                    <input class="form-control search-bar" type="search" placeholder="Search for course">
-                </form>
+                <div class="nav-item">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search for course" aria-label="Search">
+                            <button class="btn btn-outline-secondary" type="submit" ><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
                 <a class="btn btn-primary ms-3" href="/search_helu_frontend/account/login">Login</a>
             </div>
         </div>

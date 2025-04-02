@@ -1,56 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/register.css">
-</head>
+<?php include __DIR__ . '/../shared/header.php'; ?>
 
 <body>
-
-    <?php include '../includes/header.php'; ?>
-
-    <div class="container">
-        <div class="register-box">
-            <h2>Create an Account</h2>
-            <form action="register_process.php" method="POST">
-                <div class="input-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-                </div>
-                <div class="input-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-                </div>
-                <div class="input-group">
-                    <label for="username">User Name</label>
-                    <input type="text" id="username" name="username" placeholder="User Name" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">E-Mail</label>
-                    <input type="email" id="email" name="email" placeholder="E-Mail" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-                </div>
-                <div class="input-group">
-                    <label for="confirm_password">Password Confirmation</label>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Password Confirmation" required>
-                </div>
-                <div class="terms">
-                    <input type="checkbox" required> By signing up, I agree with the website’s <a href="#">Terms and Conditions</a>
-                </div>
-                <button type="submit" class="register-btn">Register</button>
-            </form>
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Register</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="username" placeholder="User Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-Mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="E-Mail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Password Confirmation</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Password Confirmation">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="terms">
+                        <label class="form-check-label" for="terms">By signing up, I agree with the website's Terms and Conditions</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                    <!-- Chưa sử lý sự kiện của Register -->
+                </form>
+            </div>
         </div>
     </div>
-
-    <?php include '../includes/footer.php'; ?>
-
 </body>
 
-</html>
+<?php include __DIR__ . '/../shared/footer.php'; ?>

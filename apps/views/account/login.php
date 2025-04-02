@@ -17,7 +17,7 @@
             </div>
             <button type="submit" class="btn btn-primary w-100 mt-3">Sign In</button>
         </form>
-        <p class="text-center mt-3">Don't have an account? <a href="#" class="text-decoration-none">Register Now</a></p>
+        <p class="text-center mt-3">Don't have an account? <a href="/search_helu_frontend/account/register" class="text-decoration-none">Register Now</a></p>
     </div>
 </div>
 
