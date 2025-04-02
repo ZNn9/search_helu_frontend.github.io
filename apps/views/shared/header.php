@@ -11,10 +11,12 @@
         .nav-link { color: black; }
         .nav-link.active { background-color: #6a11cb; color: white !important; }
         .search-bar { width: 250px; }
+        /* Đảm bảo nội dung bên dưới navbar không bị che khuất */
+        body { padding-top: 56px; } /* Chiều cao navbar mặc định là 56px */
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/search_helu_frontend/home"><img src="logo.png" alt="Logo" height="40"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -32,18 +34,18 @@
                             <li><a class="dropdown-item" href="#">Page 2</a></li>
                         </ul>
                     </li>
-
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
-                <div class="nav-item">
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search for course" aria-label="Search">
-                            <button class="btn btn-outline-secondary" type="submit" ><i class="bi bi-search"></i></button>
-                        </form>
-                    </div>
+                <div class="nav-item d-flex align-items-center">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search for course" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
                 <a class="btn btn-primary ms-3" href="/search_helu_frontend/account/login">Login</a>
             </div>
         </div>
     </nav>
+
 </body>
 </html>

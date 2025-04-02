@@ -93,7 +93,7 @@
         <div class="col-lg-3">
             <h5>Course Category</h5>
             <div class="list-group overflow-auto" style="max-height: 600px;">
-                <?php 
+                <?php
                 $categories = ["Commercial", "Office", "Shop", "Educate", "Academy", "Single family home", "Studio", "University"];
                 foreach ($categories as $category) { ?>
                     <div class="list-group-item d-flex justify-content-between align-items-center">
@@ -110,27 +110,27 @@
 <?php include __DIR__ . '/../shared/footer.php'; ?>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".btn-favorite").forEach(button => {
-        let courseId = button.dataset.course;
-        if (localStorage.getItem(courseId) === "true") {
-            button.classList.add("btn-danger");
-            button.innerHTML = '<i class="bi bi-heart-fill"></i>';
-        }
-        
-        button.addEventListener("click", function() {
-            let isFavorite = localStorage.getItem(courseId) === "true";
-            localStorage.setItem(courseId, isFavorite ? "false" : "true");
-            button.classList.toggle("btn-danger", !isFavorite);
-            button.innerHTML = isFavorite ? '<i class="bi bi-heart"></i>' : '<i class="bi bi-heart-fill"></i>';
-        });
-    });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".btn-favorite").forEach(button => {
+            let courseId = button.dataset.course;
+            if (localStorage.getItem(courseId) === "true") {
+                button.classList.add("btn-danger");
+                button.innerHTML = '<i class="bi bi-heart-fill"></i>';
+            }
 
-    document.querySelectorAll(".btn-save").forEach(button => {
-        let courseId = button.dataset.course;
-        button.addEventListener("click", function() {
-            alert(`Course ${courseId} saved!`);
+            button.addEventListener("click", function() {
+                let isFavorite = localStorage.getItem(courseId) === "true";
+                localStorage.setItem(courseId, isFavorite ? "false" : "true");
+                button.classList.toggle("btn-danger", !isFavorite);
+                button.innerHTML = isFavorite ? '<i class="bi bi-heart"></i>' : '<i class="bi bi-heart-fill"></i>';
+            });
+        });
+
+        document.querySelectorAll(".btn-save").forEach(button => {
+            let courseId = button.dataset.course;
+            button.addEventListener("click", function() {
+                alert(`Course ${courseId} saved!`);
+            });
         });
     });
-});
 </script>
