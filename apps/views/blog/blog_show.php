@@ -1,114 +1,149 @@
 <?php include __DIR__ . '/../shared/header.php'; ?>
+<style>
+    .custom-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-<body class="bg-light">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card shadow-sm p-4">
-                    <!-- Tiêu đề bài viết -->
-                    <h1 class="mb-3">Best LearnPress WordPress Theme Collection For 2023</h1>
+    .form-label {
+        font-weight: bold;
+    }
 
-                    <!-- Thông tin bài viết -->
-                    <div class="blog-meta text-muted mb-3">
-                        <span class="me-3"><i class="fas fa-user"></i> Determined-polaris</span>
-                        <span class="me-3"><i class="fas fa-calendar-alt"></i> Jan 12, 2023</span>
-                        <span><i class="fas fa-comments"></i> 20 Comments</span>
-                    </div>
+    .tag-btn {
+        margin: 5px;
+    }
 
-                    <!-- Ảnh bài viết -->
-                    <img src="../images/home/study.png" alt="Blog Image" class="img-fluid rounded mb-4">
+    .learnpress-card {
+        background: linear-gradient(to right, #f4e4bc, #ffffff);
+        border-radius: 15px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
 
-                    <!-- Nội dung bài viết -->
-                    <div class="blog-content">
-                        <p>This is a demo blog content. You can replace this with actual content later.</p>
-                    </div>
-                </div>
-            </div>
+    .learnpress-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
 
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <div class="card shadow-sm p-4">
-                    <h3 class="mb-3">Category</h3>
-                    <ul class="list-group list-group-flush mb-4">
-                        <li class="list-group-item">Commercial (15)</li>
-                        <li class="list-group-item">Office (15)</li>
-                        <li class="list-group-item">Shop (15)</li>
-                        <li class="list-group-item">Educate (15)</li>
-                        <li class="list-group-item">Academy (15)</li>
-                        <li class="list-group-item">Single family home (15)</li>
-                    </ul>
+    .learnpress-card .badge {
+        margin: 5px;
+    }
 
-                    <h3 class="mb-3">Recent Posts</h3>
-                    <ul class="list-unstyled recent-posts mb-4">
-                        <li class="d-flex align-items-center mb-2">
-                            <img src="../images/blog/blog1.png" alt="Recent Post" class="me-2 rounded" width="50">
-                            <span>Best LearnPress WordPress Theme Collection For 2025</span>
-                        </li>
-                        <li class="d-flex align-items-center mb-2">
-                            <img src="../images/blog/blog2.png" alt="Recent Post" class="me-2 rounded" width="50">
-                            <span>Best LearnPress Figma Theme Collection For 2025</span>
-                        </li>
-                        <li class="d-flex align-items-center">
-                            <img src="../images/blog/blog3.png" alt="Recent Post" class="me-2 rounded" width="50">
-                            <span>Best LearnPress WordPress Theme Collection For 2025</span>
-                        </li>
-                    </ul>
+    .learnpress-card .meta {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+</style>
 
-                    <h3 class="mb-3">Tags</h3>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge bg-primary">Free courses</span>
-                        <span class="badge bg-secondary">Marketing</span>
-                        <span class="badge bg-success">Idea</span>
-                        <span class="badge bg-danger">LMS</span>
-                        <span class="badge bg-warning text-dark">LearnPress</span>
-                        <span class="badge bg-info text-dark">Instructor</span>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Main Content with New LearnPress Section -->
+        <div class="col-md-8">
+            <h2 class="mb-4">Blog Posts</h2>
+            <!-- New LearnPress Theme Collection Card -->
+            <div class="card learnpress-card mb-4 custom-card">
+                <img src="https://via.placeholder.com/750x300" class="card-img-top" alt="LearnPress Theme Collection">
+                <div class="card-body">
+                    <h5 class="card-title">Best LearnPress WordPress Theme Collection For 2023</h5>
+                    <div class="meta mb-2">By <span class="text-primary">Determined-poitras</span> | Jan 24, 2023 | 20 Comments</div>
+                    <p class="card-text">Explore the top LearnPress WordPress themes for creating engaging e-learning platforms in 2023. Perfect for educators and LMS developers!</p>
+                    <div>
+                        <span class="badge bg-primary tag-btn">Free Courses</span>
+                        <span class="badge bg-secondary tag-btn">Marketing</span>
+                        <span class="badge bg-info tag-btn">Idea</span>
+                        <span class="badge bg-warning tag-btn">LMS</span>
+                        <span class="badge bg-success tag-btn">LearnPress</span>
+                        <span class="badge bg-danger tag-btn">Instructor</span>
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <!-- Điều hướng bài viết -->
-        <div class="d-flex justify-content-between my-4">
-            <a href="#" class="btn btn-outline-primary">← Prev Article</a>
-            <a href="#" class="btn btn-outline-primary">Next Article →</a>
-        </div>
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <!-- Categories -->
+            <div class="card mb-4">
+                <div class="card-header">Categories</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="#">Technology</a></li>
+                    <li class="list-group-item"><a href="#">Marketing</a></li>
+                    <li class="list-group-item"><a href="#">Education</a></li>
+                    <li class="list-group-item"><a href="#">Finance</a></li>
+                    <li class="list-group-item"><a href="#">Business</a></li>
+                </ul>
+            </div>
 
-        <!-- Bình luận -->
-        <div class="card shadow-sm p-4">
-            <h3 class="mb-3">20 Comments</h3>
-            <div class="d-flex align-items-start mb-3">
-                <img src="../images/user.png" alt="User" class="me-3 rounded-circle" width="50">
-                <div>
-                    <strong>John Doe</strong>
-                    <p class="mb-0">This is a sample comment.</p>
+            <!-- Recent Posts -->
+            <div class="card mb-4">
+                <div class="card-header">Recent Posts</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="#">Best LearnPress WordPress Themes for 2025</a></li>
+                    <li class="list-group-item"><a href="#">Top 10 Free WordPress Themes for 2025</a></li>
+                    <li class="list-group-item"><a href="#">How to Build a Website in 2025</a></li>
+                </ul>
+            </div>
+
+            <!-- Tags -->
+            <div class="card mb-4">
+                <div class="card-header">Tags</div>
+                <div class="card-body">
+                    <span class="badge bg-primary">WordPress</span>
+                    <span class="badge bg-secondary">LMS</span>
+                    <span class="badge bg-success">Education</span>
+                    <span class="badge bg-danger">Themes</span>
+                    <span class="badge bg-warning">Marketing</span>
                 </div>
             </div>
-            <div class="d-flex align-items-start">
-                <img src="../images/user.png" alt="User" class="me-3 rounded-circle" width="50">
-                <div>
-                    <strong>Jane Doe</strong>
-                    <p class="mb-0">Another sample comment.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form bình luận -->
-        <div class="card shadow-sm p-4 mt-4">
-            <h3 class="mb-3">Leave A Comment</h3>
-            <form>
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Name">
-                </div>
-                <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
-                </div>
-                <div class="mb-3">
-                    <textarea class="form-control" placeholder="Comment" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Post Comment</button>
-            </form>
         </div>
     </div>
-</body>
+
+    <!-- Comments Section -->
+    <div class="row mt-5">
+        <div class="col-md-8">
+            <h3>Comments</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Zn9</h5>
+                    <p class="card-text">Great article! Looking forward to more posts.</p>
+                    <small class="text-muted">October 03, 2024</small>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Zn9</h5>
+                    <p class="card-text">This was really helpful, thanks!</p>
+                    <small class="text-muted">October 03, 2024</small>
+                </div>
+            </div>
+
+            <!-- Comment Form -->
+            <div class="card">
+                <div class="card-body">
+                    <h4>Leave a Comment</h4>
+                    <form action="submit_comment.php" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include __DIR__ . '/../shared/footer.php'; ?>

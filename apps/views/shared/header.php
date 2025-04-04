@@ -44,13 +44,12 @@
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/course">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/blog/show/1">Blog</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Page</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">TikTok</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/search_helu_frontend/course/tiktok">Tiktok</a></li>
+                            <li><a class="dropdown-item" href="/search_helu_frontend/course/tiktok">Tiktok Page</a></li>
                             <li><a class="dropdown-item" href="#">Page 2</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
                 <div class="nav-item d-flex align-items-center">
                     <form class="d-flex">
