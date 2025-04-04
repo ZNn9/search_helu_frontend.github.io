@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
-        .nav-link { color: black; }
-        .nav-link.active { background-color: #6a11cb; color: white !important; }
-        .search-bar { width: 250px; }
+        .nav-link {
+            color: black;
+        }
+
+        .nav-link.active {
+            background-color: #6a11cb;
+            color: white !important;
+        }
+
+        .search-bar {
+            width: 250px;
+        }
+
         /* Đảm bảo nội dung bên dưới navbar không bị che khuất */
-        body { padding-top: 56px; } /* Chiều cao navbar mặc định là 56px */
+        body {
+            padding-top: 56px;
+        }
+
+        /* Chiều cao navbar mặc định là 56px */
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
         <div class="container">
@@ -26,11 +42,11 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/course">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/blog/show/1">Blog</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Page</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Page 1</a></li>
+                            <li><a class="dropdown-item" href="/search_helu_frontend/course/tiktok">Tiktok</a></li>
                             <li><a class="dropdown-item" href="#">Page 2</a></li>
                         </ul>
                     </li>
@@ -48,4 +64,5 @@
     </nav>
 
 </body>
+
 </html>

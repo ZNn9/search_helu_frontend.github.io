@@ -4,7 +4,7 @@ class BlogController {
         require_once __DIR__ . '/../views/blog/blog_list.php';
     }
 
-    public function show() {
+    public function show($id) {
         require_once __DIR__ . '/../views/blog/blog_show.php';
     }
 }

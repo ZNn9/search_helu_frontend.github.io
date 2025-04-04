@@ -7,7 +7,7 @@ define('APP_PATH', BASE_PATH . '/apps');
 
 // Hàm tự động nạp các file model
 function autoload($className) {
-    $file = APP_PATH . '/model/' . $className . '.php';
+    $file = APP_PATH . '/models/' . $className . '.php';
     if (file_exists($file)) {
         require_once $file;
     }
@@ -24,6 +24,7 @@ $path = trim(parse_url($request, PHP_URL_PATH), '/');
 // Router cơ bản
 $controller = 'Home'; // Controller mặc định
 $action = 'index';    // Action mặc định
+$params = [];         // Danh sách tham số
 $isApi = false;
 
 // Kiểm tra nếu là yêu cầu API (ví dụ: /api/)
@@ -38,34 +39,47 @@ if (!empty($path)) {
 
     // Ưu tiên xử lý tiền tố /search_helu_frontend/
     if ($parts[0] === 'search_helu_frontend') {
-        array_shift($parts); // Loại bỏ 'search_helu_frontend' khỏi mảng
-        if (!empty($parts)) {
-            $controller = ucfirst(strtolower($parts[0])) ?: 'Home';
-            $action = !empty($parts[1]) ? strtolower($parts[1]) : 'index';
-        }
-    } else {
-        // Xử lý các trường hợp khác (không có search_helu_frontend)
-        $controller = ucfirst(strtolower($parts[0])) ?: 'Home';
-        $action = !empty($parts[1]) ? strtolower($parts[1]) : 'index';
+        array_shift($parts); // Loại bỏ 'search_helu_frontend'
     }
+
+    // Thiết lập controller và action
+    if (!empty($parts[0])) {
+        $controller = ucfirst(strtolower($parts[0]));
+    }
+    if (!empty($parts[1])) {
+        $action = strtolower($parts[1]);
+    }
+
+    // Lấy danh sách tham số còn lại
+    $params = array_slice($parts, 2);
 }
 
 // Xây dựng đường dẫn file controller
 $controllerFile = APP_PATH . '/controllers/' . strtolower($controller) . 'Controller.php';
+
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
     $controllerClass = $controller . 'Controller';
+
     if (class_exists($controllerClass)) {
         $controllerObj = new $controllerClass();
+
         if (method_exists($controllerObj, $action)) {
-            if ($isApi) {
-                // Phản hồi API dưới dạng JSON
-                header('Content-Type: application/json');
-                $response = $controllerObj->$action();
-                echo json_encode($response ?: ['message' => 'Thành công']);
-            } else {
-                // Phản hồi giao diện web
-                $controllerObj->$action();
+            // Gọi phương thức tương ứng với danh sách tham số
+            try {
+                $response = call_user_func_array([$controllerObj, $action], $params);
+
+                if ($isApi) {
+                    header('Content-Type: application/json');
+                    echo json_encode($response ?: ['message' => 'Thành công']);
+                }
+            } catch (ArgumentCountError $e) {
+                if ($isApi) {
+                    header('Content-Type: application/json');
+                    echo json_encode(['error' => "Thiếu tham số cho '$action'"]);
+                } else {
+                    echo "Lỗi: Thiếu tham số cho '$action'";
+                }
             }
         } else {
             if ($isApi) {
@@ -87,6 +101,7 @@ if (file_exists($controllerFile)) {
     // Fallback về HomeController
     require_once APP_PATH . '/controllers/homeController.php';
     $controllerObj = new HomeController();
+    
     if ($isApi) {
         header('Content-Type: application/json');
         echo json_encode(['message' => 'Trang index mặc định từ API']);
