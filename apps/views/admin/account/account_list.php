@@ -190,6 +190,156 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       ?>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const editButtons = document.querySelectorAll(".btn-link.btn-primary");
+      const deleteButtons = document.querySelectorAll(".btn-link.btn-danger");
+      const editModal = document.getElementById("editRowModal");
+      const editNameInput = document.getElementById("editName");
+      const editPositionInput = document.getElementById("editPosition");
+      const editOfficeInput = document.getElementById("editOffice");
+      const saveChangesButton = document.querySelector("#editRowModal .btn-primary");
+
+      let currentRow = null; // To track the row being edited
+
+      if (!editModal) {
+        console.error("Edit modal not found!");
+        return;
+      }
+
+      // Handle edit functionality
+      editButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          currentRow = this.closest("tr");
+          if (!currentRow) {
+            console.error("Row not found!");
+            return;
+          }
+
+          const name = currentRow.querySelector("td:nth-child(1)").textContent.trim();
+          const position = currentRow.querySelector("td:nth-child(2)").textContent.trim();
+          const office = currentRow.querySelector("td:nth-child(3)").textContent.trim();
+
+          // Populate modal inputs
+          editNameInput.value = name;
+          editPositionInput.value = position;
+          editOfficeInput.value = office;
+
+          // Show the modal
+          const bootstrapModal = new bootstrap.Modal(editModal);
+          bootstrapModal.show();
+        });
+      });
+
+      // Handle save changes functionality
+      saveChangesButton.addEventListener("click", function () {
+        if (!currentRow) {
+          console.error("No row selected for editing!");
+          return;
+        }
+
+        // Update the table row with the new values
+        currentRow.querySelector("td:nth-child(1)").textContent = editNameInput.value.trim();
+        currentRow.querySelector("td:nth-child(2)").textContent = editPositionInput.value.trim();
+        currentRow.querySelector("td:nth-child(3)").textContent = editOfficeInput.value.trim();
+
+        // Hide the modal
+        const bootstrapModal = bootstrap.Modal.getInstance(editModal);
+        bootstrapModal.hide();
+      });
+
+      // Handle delete functionality
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const row = this.closest("tr");
+          if (row) {
+            // Confirm before deleting
+            const confirmDelete = confirm("Are you sure you want to delete this row?");
+            if (confirmDelete) {
+              row.remove();
+            }
+          } else {
+            console.error("Row not found!");
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Edit Modal -->
+  <div
+    class="modal fade"
+    id="editRowModal"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">
+            <span class="fw-mediumbold"> Edit</span>
+            <span class="fw-light"> Row </span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group form-group-default">
+                  <label>Name</label>
+                  <input
+                    id="editName"
+                    type="text"
+                    class="form-control"
+                    placeholder="Edit name"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 pe-0">
+                <div class="form-group form-group-default">
+                  <label>Position</label>
+                  <input
+                    id="editPosition"
+                    type="text"
+                    class="form-control"
+                    placeholder="Edit position"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-group-default">
+                  <label>Office</label>
+                  <input
+                    id="editOffice"
+                    type="text"
+                    class="form-control"
+                    placeholder="Edit office"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-primary">Save Changes</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 
