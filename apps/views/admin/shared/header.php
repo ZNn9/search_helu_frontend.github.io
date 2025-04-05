@@ -67,7 +67,7 @@
                 <a href="#">
                   <div class="notif-img">
                     <img
-                      src="assets/kaiadmin-lite-1.2.0/assets/img/jm_denis.jpg"
+                      src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/jm_denis.jpg"
                       alt="Img Profile" />
                   </div>
                   <div class="notif-content">
@@ -79,7 +79,7 @@
                 <a href="#">
                   <div class="notif-img">
                     <img
-                      src="assets/kaiadmin-lite-1.2.0/assets/img/chadengle.jpg"
+                      src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/chadengle.jpg"
                       alt="Img Profile" />
                   </div>
                   <div class="notif-content">
@@ -91,7 +91,7 @@
                 <a href="#">
                   <div class="notif-img">
                     <img
-                      src="assets/kaiadmin-lite-1.2.0/assets/img/mlane.jpg"
+                      src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/mlane.jpg"
                       alt="Img Profile" />
                   </div>
                   <div class="notif-content">
@@ -105,7 +105,7 @@
                 <a href="#">
                   <div class="notif-img">
                     <img
-                      src="assets/kaiadmin-lite-1.2.0/assets/img/talha.jpg"
+                      src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/talha.jpg"
                       alt="Img Profile" />
                   </div>
                   <div class="notif-content">
@@ -169,7 +169,7 @@
                 <a href="#">
                   <div class="notif-img">
                     <img
-                      src="assets/kaiadmin-lite-1.2.0/assets/img/profile2.jpg"
+                      src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/profile2.jpg"
                       alt="Img Profile" />
                   </div>
                   <div class="notif-content">
@@ -279,7 +279,7 @@
           aria-expanded="false">
           <div class="avatar-sm">
             <img
-              src="assets/kaiadmin-lite-1.2.0/assets/img/profile.jpg"
+              src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/profile.jpg"
               alt="..."
               class="avatar-img rounded-circle" />
           </div>
@@ -294,7 +294,7 @@
               <div class="user-box">
                 <div class="avatar-lg">
                   <img
-                    src="assets/kaiadmin-lite-1.2.0/assets/img/profile.jpg"
+                    src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/profile.jpg"
                     alt="image profile"
                     class="avatar-img rounded" />
                 </div>

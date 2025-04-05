@@ -6,11 +6,11 @@
     name="viewport" />
   <link
     rel="icon"
-    href="assets/kaiadmin-lite-1.2.0/assets/img/kaiadmin/favicon.ico"
+    href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/kaiadmin/favicon.ico"
     type="image/x-icon" />
 
   <!-- Fonts and icons -->
-  <script src="assets/kaiadmin-lite-1.2.0/assets/js/plugin/webfont/webfont.min.js"></script>
+  <script src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/js/plugin/webfont/webfont.min.js"></script>
   <script>
     WebFont.load({
       google: {
@@ -23,7 +23,7 @@
           "Font Awesome 5 Brands",
           "simple-line-icons",
         ],
-        urls: ["assets/kaiadmin-lite-1.2.0/assets/css/fonts.min.css"],
+        urls: ["/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/fonts.min.css"],
       },
       active: function() {
         sessionStorage.fonts = true;
@@ -32,12 +32,12 @@
   </script>
 
   <!-- CSS Files -->
-  <link rel="stylesheet" href="assets/kaiadmin-lite-1.2.0/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/kaiadmin-lite-1.2.0/assets/css/plugins.min.css" />
-  <link rel="stylesheet" href="assets/kaiadmin-lite-1.2.0/assets/css/kaiadmin.min.css" />
+  <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/kaiadmin.min.css" />
 
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link rel="stylesheet" href="assets/kaiadmin-lite-1.2.0/assets/css/demo.css" />
+  <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/demo.css" />
 
   <!-- Custom CSS -->
   <style>
@@ -65,7 +65,7 @@
         <div class="logo-header" data-background-color="dark">
           <a href="/search_helu_frontend/home" class="logo">
             <img
-              src="assets/kaiadmin-lite-1.2.0/assets/img/kaiadmin/logo_light.svg"
+              src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/kaiadmin/logo_light.svg"
               alt="navbar brand"
               class="navbar-brand"
               height="20" />
@@ -113,10 +113,21 @@
                     </a>
                   </li>
                   <li>
+                    <a href="/search_helu_frontend/admin/listcourses">
+                      <span class="sub-item">List Courses</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/search_helu_frontend/admin/listlesson">
+                      <span class="sub-item">List lesson</span>
+                    </a>
+                  </li>
+                  
+                  <!-- <li>
                     <a href="#">
                       <span class="sub-item">Account ...</span>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </li>
@@ -133,7 +144,7 @@
           <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
               <img
-                src="assets/kaiadmin-lite-1.2.0/assets/img/kaiadmin/logo_light.svg"
+                src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/kaiadmin/logo_light.svg"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20" />
