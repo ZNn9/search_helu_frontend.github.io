@@ -46,8 +46,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">TikTok</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/search_helu_frontend/course/tiktok">Tiktok Page</a></li>
-                            <li><a class="dropdown-item" href="#">Page 2</a></li>
+                            <li><a class="dropdown-item" href="/search_helu_frontend/tiktok">Tiktok Home</a></li>
+                            <li><a class="dropdown-item" href="/search_helu_frontend/tiktok/account">Tiktok Profile</a></li>
                         </ul>
                     </li>
                 </ul>

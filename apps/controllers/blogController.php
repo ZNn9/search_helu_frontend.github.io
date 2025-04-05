@@ -5,7 +5,13 @@ class BlogController {
     }
 
     public function show($id) {
-        require_once __DIR__ . '/../views/blog/blog_show.php';
+        if (true) {
+            include __DIR__ . '/../views/blog/blog_show.php';
+        } else {
+            echo "Không thấy sản phẩm.";
+        }
     }
+
+
 }
 ?>

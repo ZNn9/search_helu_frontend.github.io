@@ -19,7 +19,7 @@
         <h2 class="text-center mb-4">Top Categories</h2>
         <div class="row row-cols-2 row-cols-md-4 g-3">
             <?php
-            $categories = ["Art & Design", "Development", "Communication", "Videography", "Photography", "Marketing", "Content Writing", "Finance", "Network"];
+            $categories = ["Art & Design", "Development", "Communication", "Videography", "Photography", "Marketing", "Content Writing", "Finance"];
             foreach ($categories as $category) {
                 ?>
                     <div class="col" type="submit" href="#"><div class="card p-3 text-center border-0 shadow-sm"><h5>$category</h5><p>39 Courses</p></div></div>

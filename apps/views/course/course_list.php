@@ -54,7 +54,6 @@
                                     <div>
                                         <span class="text-warning">★★★★☆</span>
                                     </div>
-                                    <span class="badge bg-success">Free</span>
                                 </div>
                                 <div class="mt-2">
                                     <button class="btn btn-outline-primary btn-sm me-2 btn-favorite" data-course="course<?= $i ?>"><i class="bi bi-heart"></i></button>

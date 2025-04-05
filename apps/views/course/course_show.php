@@ -214,7 +214,6 @@
                         <span class="badge bg-info text-dark">20 Lessons</span>
                         <span class="badge bg-info text-dark">4 Quizzes</span>
                     </p>
-                    <h4 class="text-danger">$49.0</h4>
                     <a href="#" class="btn btn-success w-100">Start Now</a>
                 </div>
             </div>

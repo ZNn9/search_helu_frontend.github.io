@@ -12,9 +12,5 @@ class CourseController {
             echo "Không thấy sản phẩm.";
         }
     }
-
-    public function tiktok() {
-        require_once __DIR__ . '/../views/tiktok/tiktok_list.php';
-    }
 }
 ?>
