@@ -34,7 +34,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/search_helu_frontend/home"><img src="logo.png" alt="Logo" height="40"></a>
+            <a class="navbar-brand" href="/search_helu_frontend/home"><img src="assets/icons/logo.png" alt="Logo" height="40"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,6 +43,7 @@
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/course">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/blog/show/1">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/admin">Dashboard</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">TikTok</a>
                         <ul class="dropdown-menu">
