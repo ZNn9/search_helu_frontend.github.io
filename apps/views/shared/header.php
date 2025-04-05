@@ -34,7 +34,9 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/search_helu_frontend/home"><img src="assets/icons/logo.png" alt="Logo" height="40"></a>
+            <a class="navbar-brand" href="/search_helu_frontend/home">
+                <img src="/search_helu_frontend/assets/icons/logo.png" alt="Logo" height="40">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>

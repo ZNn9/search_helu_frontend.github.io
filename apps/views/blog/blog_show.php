@@ -36,6 +36,12 @@
         color: #6c757d;
         font-size: 0.9rem;
     }
+
+    .centered-img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 
 <div class="container mt-4">
@@ -45,7 +51,7 @@
             <h2 class="mb-4">Blog Posts</h2>
             <!-- New LearnPress Theme Collection Card -->
             <div class="card learnpress-card mb-4 custom-card">
-                <img src="https://via.placeholder.com/750x300" class="card-img-top" alt="LearnPress Theme Collection">
+                <img src="/search_helu_frontend/assets/images/study.png" class="card-img-top centered-img" alt="LearnPress Theme Collection" style="width: 500px; height: 400px;">
                 <div class="card-body">
                     <h5 class="card-title">Best LearnPress WordPress Theme Collection For 2023</h5>
                     <div class="meta mb-2">By <span class="text-primary">Determined-poitras</span> | Jan 24, 2023 | 20 Comments</div>
