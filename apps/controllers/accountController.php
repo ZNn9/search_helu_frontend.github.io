@@ -35,90 +35,55 @@ class AccountController
         return false;
     }
 
-
-    // Lấy thông tin tài khoản
-    public function getAccountInfo()
+    // Giải mã token và lấy thông tin người dùng
+    public function getUserInfo()
     {
-        // Kiểm tra nếu người dùng chưa đăng nhập
-        if (!$this->isLoggedIn()) {
-            header('Location: /search_helu_frontend/account/login');
-            exit;
+        if (!isset($_COOKIE['token'])) {
+            return null;
         }
 
-        // Lấy token từ cookie
         $token = $_COOKIE['token'];
+        $parts = explode('.', $token);
 
-        // Gọi API để lấy thông tin tài khoản
-        $host = $_SERVER['HTTP_HOST']; // Lấy domain hiện tại (localhost hoặc 127.0.0.1)
-        $ch = curl_init("http://$host:8000/api/auth/google/account");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [ 
-            'Authorization: Bearer ' . $token
-        ]);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        // Chuyển đổi phản hồi thành JSON
-        $data = json_decode($response, true);
-
-        // Kiểm tra nếu API trả về lỗi
-        if (isset($data['error'])) {
-            echo 'Lỗi: ' . $data['error'];
-            exit;
+        if (count($parts) !== 3) {
+            return null; // Token không hợp lệ
         }
 
-        return $data; // Trả về thông tin tài khoản
-    }
+        $payload = json_decode(base64_decode($parts[1]), true);
 
-    // Trang thông tin tài khoản
-    public function profile()
-    {
-        // Lấy thông tin tài khoản
-        $accountInfo = $this->getAccountInfo();
-
-        // Hiển thị trang profile
-        require_once __DIR__ . '/../views/tiktok/tiktok_profile.php';
-    }
-
-    public function handleGoogleCallback()
-    {
-        try {
-            // Lấy mã code từ URL
-            $code = $_GET['code'] ?? null;
-
-            if (!$code) {
-                header('Location: /search_helu_frontend/account/login');
-                exit;
-            }
-
-            // Gửi yêu cầu đến API để xử lý callback từ Google
-            $ch = curl_init('http://127.0.0.1:8000/api/auth/google/callback?code=' . urlencode($code));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-            $data = json_decode($response, true);
-
-            // Kiểm tra nếu API trả về token
-            if (isset($data['token'])) {
-                // Lưu token vào cookie
-                setcookie('token', $data['token'], time() + 3600, '/', '', false, true);
-                error_log('Cookie token đã được lưu: ' . $data['token']);
-
-                // Chuyển hướng về trang home
-                header('Location: /search_helu_frontend/home');
-                exit;
-            } else {
-                // Nếu không có token, chuyển hướng về trang login
-                error_log('Không nhận được token từ API, chuyển hướng về trang login.');
-                header('Location: /search_helu_frontend/account/login');
-                exit;
-            }
-        } catch (Exception $e) {
-            // Nếu xảy ra lỗi, chuyển hướng về trang login
-            error_log('Lỗi khi xử lý callback Google: ' . $e->getMessage());
-            header('Location: /search_helu_frontend/account/login');
-            exit;
+        if (!$payload) {
+            return null; // Không thể giải mã payload
         }
+
+        return $payload; // Trả về thông tin người dùng từ token
+    }
+    // Lấy danh sách role của người dùng
+    public function getUserRoles()
+    {
+        $userInfo = $this->getUserInfo();
+        $roles = $userInfo['roles'] ?? []; // Lấy danh sách roles từ token
+    
+        // Kiểm tra nếu roles không phải là mảng
+        if (!is_array($roles)) {
+            // Nếu roles là chuỗi, chuyển thành mảng
+            $roles = [$roles];
+        }
+    
+        // Chỉ lấy thuộc tính 'name' của từng role nếu roles là mảng các đối tượng
+        $roleNames = array_map(function ($role) {
+            if (is_array($role) && isset($role['name'])) {
+                return $role['name'];
+            }
+            return is_string($role) ? $role : 'Unknown Role';
+        }, $roles);
+    
+        return $roleNames;
+    }
+
+    // Lấy tên tài khoản của người dùng
+    public function getAccountName()
+    {
+        $userInfo = $this->getUserInfo();
+        return $userInfo['accountName'] ?? 'User';
     }
 }

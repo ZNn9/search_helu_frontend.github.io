@@ -3,9 +3,15 @@ require_once __DIR__ . '/../../controllers/accountController.php';
 $accountController = new AccountController(); // Khởi tạo đối tượng AccountController
 
 // Hàm lấy tên tài khoản từ AccountController
-function getAccountName($accountController) {
-    $accountInfo = $accountController->getAccountInfo();
-    return $accountInfo['accountName'] ?? 'User';
+function getAccountName($accountController)
+{
+    return $accountController->getAccountName();
+}
+
+// Hàm lấy danh sách role từ AccountController
+function getUserRoles($accountController)
+{
+    return $accountController->getUserRoles();
 }
 ?>
 
@@ -72,7 +78,22 @@ function getAccountName($accountController) {
                             <?php echo htmlspecialchars(getAccountName($accountController)); ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="/search_helu_frontend/account/profile">Profile</a></li>
+                            <li class="dropdown-item">
+                                <div>
+                                    <?php
+                                    $roles = getUserRoles($accountController);
+                                    if (is_array($roles) && !empty($roles)): ?>
+                                        <?php foreach ($roles as $role): ?>
+                                            <span class="badge bg-secondary me-1"><?php echo htmlspecialchars($role); ?></span>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <span class="text-muted">No roles available</span>
+                                    <?php endif; ?>
+                                </div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="/search_helu_frontend/account/logout">Logout</a></li>
                         </ul>
                     </div>
@@ -82,6 +103,7 @@ function getAccountName($accountController) {
             </div>
         </div>
     </nav>
+
 </body>
 
 </html>
