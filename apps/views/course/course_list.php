@@ -40,7 +40,7 @@
                 for ($i = $startCourse + 1; $i <= $endCourse; $i++) { ?>
                     <div class="col">
                         <div class="card h-100 border-0 shadow-sm rounded-3">
-                            <img src="course1.jpg" class="card-img-top rounded-top" alt="Course 1" style="height: 180px; object-fit: cover;">
+                            <img src="assets/images/study.png" class="card-img-top rounded-top" alt="Course 1" style="height: 180px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">Create An LMS Website With LearnPress</h5>
                                 <p class="card-text"><small class="text-muted">by Determined Poltras</small></p>

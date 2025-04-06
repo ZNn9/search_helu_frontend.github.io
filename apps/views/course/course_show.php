@@ -54,18 +54,26 @@
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                         <p class="text-muted lead">LearnPress is a comprehensive WordPress LMS Plugin for WordPress. This is one of the best WordPress LMS Plugins which can be used to easily create & sell courses online.</p>
                     </div>
+                    <?php
+
+                    // Đảm bảo biến $courseId được truyền vào
+                    if (!isset($courseId)) {
+                        $courseId = 1; // Giá trị mặc định nếu không có
+                    }
+                    ?>
                     <!-- Curriculum Tab -->
                     <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
                         <ul class="list-unstyled">
                             <?php
                             for ($i = 1; $i <= 10; $i++) { ?>
                                 <li class="mb-2">
-                                    <button class="btn btn-primary btn-sm me-2">Preview</button>
+                                    <a href="/search_helu_frontend/course/show/<?php echo $courseId; ?>/lesson?lesson=<?php echo $i; ?>" class="btn btn-primary btn-sm me-2">Preview</a>
                                     HELU Lesson <?php echo $i; ?>
                                 </li>
                             <?php } ?>
                         </ul>
                     </div>
+                    
                     <!-- Instructor Tab -->
                     <div class="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
                         <div class="d-flex align-items-center mb-3">
