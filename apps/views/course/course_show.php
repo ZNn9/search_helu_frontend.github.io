@@ -60,7 +60,7 @@
                             <?php
                             for ($i = 1; $i <= 10; $i++) { ?>
                                 <li class="mb-2">
-                                    <a href="/search_helu_frontend/lesson?lesson=<?php echo $i; ?>" class="btn btn-primary btn-sm me-2">Preview</a>
+                                    <a href="/search_helu_frontend/course/show/1/lesson?lesson=<?php echo $i; ?>" class="btn btn-primary btn-sm me-2">Preview</a>
                                     HELU Lesson <?php echo $i; ?>
                                 </li>
                             <?php } ?>
