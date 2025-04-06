@@ -1,345 +1,174 @@
-<?php 
-// Debugging: Check if the file exists before including
-if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
-    echo "Error: left_sidebar.php not found!";
-} else {
-    include __DIR__ . '/../shared/left_sidebar.php';
-}
+<?php
+include __DIR__ . '/../shared/left_sidebar.php';
+include __DIR__ . '/../shared/header.php';
 ?>
-  <body>
-    <div class="wrapper">
-        <div class="container">
-        <!-- Debugging: Check if header.php exists -->
-        <?php 
-              if (!file_exists(__DIR__ . '/../shared/header.php')) {
-                  echo "Error: header.php not found!";
-              } else {
-                  include __DIR__ . '/../shared/header.php';
-              }
-        ?>
-          <div class="page-inner">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    <div class="d-flex align-items-center">
-                      <h4 class="card-title">Add Row</h4>
-                      <button
-                        class="btn btn-primary btn-round ms-auto"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addRowModal"
-                      >
-                        <i class="fa fa-plus"></i>
-                        Add Row
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <!-- Modal -->
-                    <div
-                      class="modal fade"
-                      id="addRowModal"
-                      tabindex="-1"
-                      role="dialog"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header border-0">
-                            <h5 class="modal-title">
-                              <span class="fw-mediumbold"> New</span>
-                              <span class="fw-light"> Row </span>
-                            </h5>
-                            <button
-                              type="button"
-                              class="close"
-                              data-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <p class="small">
-                              Create a new row using this form, make sure you
-                              fill them all
-                            </p>
-                            <form>
-                              <div class="row">
-                                <div class="col-sm-12">
-                                  <div class="form-group form-group-default">
-                                    <label>Name</label>
-                                    <input
-                                      id="addName"
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="fill name"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="col-md-6 pe-0">
-                                  <div class="form-group form-group-default">
-                                    <label>Position</label>
-                                    <input
-                                      id="addPosition"
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="fill position"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group form-group-default">
-                                    <label>Office</label>
-                                    <input
-                                      id="addOffice"
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="fill office"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer border-0">
-                            <button
-                              type="button"
-                              id="addRowButton"
-                              class="btn btn-primary"
-                            >
-                              Add
-                            </button>
-                            <button
-                              type="button"
-                              class="btn btn-danger"
-                              data-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="table-responsive">
-                      <table
-                        id="add-row"
-                        class="display table table-striped table-hover"
-                      >
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th style="width: 10%">Action</th>
-                          </tr>
-                        </thead>
-                        <tfoot>
-                          <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Action</th>
-                          </tr>
-                        </tfoot>
-                        <tbody>
-                          <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>
-                              <div class="form-button-action">
-                                <button
-                                  type="button"
-                                  data-bs-toggle="tooltip"
-                                  title=""
-                                  class="btn btn-link btn-primary btn-lg"
-                                  data-original-title="Edit Task"
-                                >
-                                  <i class="fa fa-edit"></i>
-                                </button>
-                                <button
-                                  type="button"
-                                  data-bs-toggle="tooltip"
-                                  title=""
-                                  class="btn btn-link btn-danger"
-                                  data-original-title="Remove"
-                                >
-                                  <i class="fa fa-times"></i>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-      <!-- Debugging: Check if footer.php exists -->
-      <?php 
-      if (!file_exists(__DIR__ . '/../shared/footer.php')) {
-          echo "Error: footer.php not found!";
-      } else {
-          include __DIR__ . '/../shared/footer.php';
-      }
-      ?>
-    </div>
-  </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const editButtons = document.querySelectorAll(".btn-link.btn-primary");
-      const deleteButtons = document.querySelectorAll(".btn-link.btn-danger");
-      const editModal = document.getElementById("editRowModal");
-      const editNameInput = document.getElementById("editName");
-      const editPositionInput = document.getElementById("editPosition");
-      const editOfficeInput = document.getElementById("editOffice");
-      const saveChangesButton = document.querySelector("#editRowModal .btn-primary");
+<div class="container mt-4">
+  <h2>Danh sách khoá học</h2>
+  <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Thêm khoá học</button>
 
-      let currentRow = null; // To track the row being edited
+  <table class="table table-bordered" id="courseTable">
+    <thead>
+      <tr>
+        <th>Tên khoá học</th>
+        <th>Mô tả</th>
+        <th>Ngày tạo</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dữ liệu sẽ được load bằng JS -->
+    </tbody>
+  </table>
+</div>
 
-      if (!editModal) {
-        console.error("Edit modal not found!");
-        return;
-      }
-
-      // Handle edit functionality
-      editButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-          currentRow = this.closest("tr");
-          if (!currentRow) {
-            console.error("Row not found!");
-            return;
-          }
-
-          const name = currentRow.querySelector("td:nth-child(1)").textContent.trim();
-          const position = currentRow.querySelector("td:nth-child(2)").textContent.trim();
-          const office = currentRow.querySelector("td:nth-child(3)").textContent.trim();
-
-          // Populate modal inputs
-          editNameInput.value = name;
-          editPositionInput.value = position;
-          editOfficeInput.value = office;
-
-          // Show the modal
-          const bootstrapModal = new bootstrap.Modal(editModal);
-          bootstrapModal.show();
-        });
-      });
-
-      // Handle save changes functionality
-      saveChangesButton.addEventListener("click", function () {
-        if (!currentRow) {
-          console.error("No row selected for editing!");
-          return;
-        }
-
-        // Update the table row with the new values
-        currentRow.querySelector("td:nth-child(1)").textContent = editNameInput.value.trim();
-        currentRow.querySelector("td:nth-child(2)").textContent = editPositionInput.value.trim();
-        currentRow.querySelector("td:nth-child(3)").textContent = editOfficeInput.value.trim();
-
-        // Hide the modal
-        const bootstrapModal = bootstrap.Modal.getInstance(editModal);
-        bootstrapModal.hide();
-      });
-
-      // Handle delete functionality
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-          const row = this.closest("tr");
-          if (row) {
-            // Confirm before deleting
-            const confirmDelete = confirm("Are you sure you want to delete this row?");
-            if (confirmDelete) {
-              row.remove();
-            }
-          } else {
-            console.error("Row not found!");
-          }
-        });
-      });
-    });
-  </script>
-
-  <!-- Edit Modal -->
-  <div
-    class="modal fade"
-    id="editRowModal"
-    tabindex="-1"
-    role="dialog"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header border-0">
-          <h5 class="modal-title">
-            <span class="fw-mediumbold"> Edit</span>
-            <span class="fw-light"> Row </span>
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group form-group-default">
-                  <label>Name</label>
-                  <input
-                    id="editName"
-                    type="text"
-                    class="form-control"
-                    placeholder="Edit name"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6 pe-0">
-                <div class="form-group form-group-default">
-                  <label>Position</label>
-                  <input
-                    id="editPosition"
-                    type="text"
-                    class="form-control"
-                    placeholder="Edit position"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group form-group-default">
-                  <label>Office</label>
-                  <input
-                    id="editOffice"
-                    type="text"
-                    class="form-control"
-                    placeholder="Edit office"
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer border-0">
-          <button type="button" class="btn btn-primary">Save Changes</button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
+<!-- Modal Thêm -->
+<div class="modal fade" id="addModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm khoá học</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input id="courseName" class="form-control mb-2" placeholder="Tên khoá học">
+        <textarea id="courseDesc" class="form-control" placeholder="Mô tả"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="addCourse()">Thêm</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>
-</body>
+</div>
 
+<!-- Modal Sửa -->
+<div class="modal fade" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sửa khoá học</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input id="editCourseName" class="form-control mb-2" placeholder="Tên khoá học">
+        <textarea id="editCourseDesc" class="form-control" placeholder="Mô tả"></textarea>
+        <input type="hidden" id="editCourseId">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" onclick="updateCourse()">Lưu</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<?php include __DIR__ . '/../shared/footer.php'; ?>
+
+<script>
+  const API_BASE = "http://127.0.0.1:8000/api/courses";
+
+  document.addEventListener("DOMContentLoaded", loadCourses);
+
+  function loadCourses() {
+    fetch(API_BASE)
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#courseTable tbody");
+        tbody.innerHTML = "";
+        data.data.forEach(course => {
+          const row = `
+          <tr>
+            <td>${course.courseName}</td>
+            <td>${course.description}</td>
+            <td>${course.timeCreated}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" onclick='showEdit(${JSON.stringify(course)})'>Sửa</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCourse(${course.idCourse})">Xoá</button>
+            </td>
+          </tr>
+        `;
+          tbody.innerHTML += row;
+        });
+      });
+  }
+
+  function addCourse() {
+    const name = document.getElementById("courseName").value;
+    const desc = document.getElementById("courseDesc").value;
+
+    fetch(API_BASE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          courseName: name,
+          description: desc,
+          idAccount: 1,
+          idIndustryType: 1,
+          idPriorityType: 1,
+          idCopyrightType: 1,
+          idStatusType: 1
+        })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Thêm thành công!");
+        document.getElementById("courseName").value = "";
+        document.getElementById("courseDesc").value = "";
+        const modal = bootstrap.Modal.getInstance(document.getElementById("addModal"));
+        modal.hide();
+        loadCourses();
+      });
+  }
+
+  function deleteCourse(id) {
+    if (!confirm("Bạn có chắc muốn xoá?")) return;
+    fetch(`${API_BASE}/${id}`, {
+        method: "DELETE"
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Xoá thành công!");
+        loadCourses();
+      });
+  }
+
+  function showEdit(course) {
+    document.getElementById("editCourseId").value = course.idCourse;
+    document.getElementById("editCourseName").value = course.courseName;
+    document.getElementById("editCourseDesc").value = course.description;
+    const modal = new bootstrap.Modal(document.getElementById("editModal"));
+    modal.show();
+  }
+
+  function updateCourse() {
+    const id = document.getElementById("editCourseId").value;
+    const name = document.getElementById("editCourseName").value;
+    const desc = document.getElementById("editCourseDesc").value;
+
+    fetch(`${API_BASE}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          courseName: name,
+          description: desc,
+          idAccount: 1,
+          idIndustryType: 1,
+          idPriorityType: 1,
+          idCopyrightType: 1,
+          idStatusType: 1
+        })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Cập nhật thành công!");
+        const modal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
+        modal.hide();
+        loadCourses();
+      });
+  }
+</script>

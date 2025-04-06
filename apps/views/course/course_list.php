@@ -58,7 +58,7 @@
                                 <div class="mt-2">
                                     <button class="btn btn-outline-primary btn-sm me-2 btn-favorite" data-course="course<?= $i ?>"><i class="bi bi-heart"></i></button>
                                     <button class="btn btn-outline-warning btn-sm ms-2 btn-save" data-course="course<?= $i ?>"><i class="bi bi-bookmark"></i></button>
-                                    <a href="/search_helu_frontend/course/show/2" class="btn btn-primary btn-sm ms-2">View More</a>
+                                    <a href="/search_helu_frontend/course/show/1" class="btn btn-primary btn-sm ms-2">View More</a>
                                 </div>
                             </div>
                         </div>
