@@ -20,6 +20,13 @@ include __DIR__ . '/../shared/header.php';
       <!-- Dữ liệu sẽ được load bằng JS -->
     </tbody>
   </table>
+
+  <!-- Phân trang -->
+  <nav>
+    <ul class="pagination justify-content-center" id="pagination">
+      <!-- Nút trang sẽ được tạo bằng JS -->
+    </ul>
+  </nav>
 </div>
 
 <!-- Modal Thêm -->
@@ -68,29 +75,62 @@ include __DIR__ . '/../shared/header.php';
 <script>
   const API_BASE = "http://127.0.0.1:8000/api/courses";
 
+  let courses = [];
+  const pageSize = 5;
+  let currentPage = 1;
+
   document.addEventListener("DOMContentLoaded", loadCourses);
 
   function loadCourses() {
     fetch(API_BASE)
       .then(res => res.json())
       .then(data => {
-        const tbody = document.querySelector("#courseTable tbody");
-        tbody.innerHTML = "";
-        data.data.forEach(course => {
-          const row = `
-          <tr>
-            <td>${course.courseName}</td>
-            <td>${course.description}</td>
-            <td>${course.timeCreated}</td>
-            <td>
-              <button class="btn btn-sm btn-warning" onclick='showEdit(${JSON.stringify(course)})'>Sửa</button>
-              <button class="btn btn-sm btn-danger" onclick="deleteCourse(${course.idCourse})">Xoá</button>
-            </td>
-          </tr>
-        `;
-          tbody.innerHTML += row;
-        });
+        courses = data.data;
+        renderTable();
+        renderPagination();
       });
+  }
+
+  function renderTable() {
+    const tbody = document.querySelector("#courseTable tbody");
+    tbody.innerHTML = "";
+
+    const start = (currentPage - 1) * pageSize;
+    const paginatedCourses = courses.slice(start, start + pageSize);
+
+    paginatedCourses.forEach(course => {
+      const row = `
+        <tr>
+          <td>${course.courseName}</td>
+          <td>${course.description}</td>
+          <td>${course.timeCreated}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" onclick='showEdit(${JSON.stringify(course)})'>Sửa</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteCourse(${course.idCourse})">Xoá</button>
+          </td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(courses.length / pageSize);
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+      const li = document.createElement("li");
+      li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+      li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+      li.addEventListener("click", function (e) {
+        e.preventDefault();
+        currentPage = i;
+        renderTable();
+        renderPagination();
+      });
+      pagination.appendChild(li);
+    }
   }
 
   function addCourse() {
@@ -103,13 +143,13 @@ include __DIR__ . '/../shared/header.php';
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          courseName: name,
-          description: desc,
-          idAccount: 1,
+          idAccount: 6,
           idIndustryType: 1,
           idPriorityType: 1,
           idCopyrightType: 1,
-          idStatusType: 1
+          idStatusType: 1,
+          courseName: name,
+          description: desc
         })
       })
       .then(res => res.json())
@@ -119,6 +159,7 @@ include __DIR__ . '/../shared/header.php';
         document.getElementById("courseDesc").value = "";
         const modal = bootstrap.Modal.getInstance(document.getElementById("addModal"));
         modal.hide();
+        currentPage = 1; // reset về trang đầu
         loadCourses();
       });
   }
@@ -131,6 +172,7 @@ include __DIR__ . '/../shared/header.php';
       .then(res => res.json())
       .then(() => {
         alert("Xoá thành công!");
+        currentPage = 1;
         loadCourses();
       });
   }
@@ -154,13 +196,13 @@ include __DIR__ . '/../shared/header.php';
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          courseName: name,
-          description: desc,
-          idAccount: 1,
+          idAccount: 6,
           idIndustryType: 1,
           idPriorityType: 1,
           idCopyrightType: 1,
-          idStatusType: 1
+          idStatusType: 1,
+          courseName: name,
+          description: desc
         })
       })
       .then(res => res.json())
@@ -168,6 +210,7 @@ include __DIR__ . '/../shared/header.php';
         alert("Cập nhật thành công!");
         const modal = bootstrap.Modal.getInstance(document.getElementById("editModal"));
         modal.hide();
+        currentPage = 1;
         loadCourses();
       });
   }
