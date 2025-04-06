@@ -200,6 +200,13 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       const editOfficeInput = document.getElementById("editOffice");
       const saveChangesButton = document.querySelector("#editRowModal .btn-primary");
 
+      const addRowButton = document.getElementById("addRowButton");
+      const addNameInput = document.getElementById("addName");
+      const addPositionInput = document.getElementById("addPosition");
+      const addOfficeInput = document.getElementById("addOffice");
+      const addRowModal = document.getElementById("addRowModal");
+      const tableBody = document.querySelector("#add-row tbody");
+
       let currentRow = null; // To track the row being edited
 
       if (!editModal) {
@@ -263,6 +270,110 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
           }
         });
       });
+
+      // Handle add row functionality
+      addRowButton.addEventListener("click", function () {
+        const name = addNameInput.value.trim();
+        const position = addPositionInput.value.trim();
+        const office = addOfficeInput.value.trim();
+
+        if (!name || !position || !office) {
+          alert("Please fill in all fields before adding a row.");
+          return;
+        }
+
+        // Create a new row
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td>${name}</td>
+          <td>${position}</td>
+          <td>${office}</td>
+          <td>
+            <div class="form-button-action">
+              <button
+                type="button"
+                data-bs-toggle="tooltip"
+                title=""
+                class="btn btn-link btn-primary btn-lg"
+                data-original-title="Edit Task"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+              <button
+                type="button"
+                data-bs-toggle="tooltip"
+                title=""
+                class="btn btn-link btn-danger"
+                data-original-title="Remove"
+              >
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </td>
+        `;
+
+        // Append the new row to the table
+        tableBody.appendChild(newRow);
+
+        // Clear the input fields
+        addNameInput.value = "";
+        addPositionInput.value = "";
+        addOfficeInput.value = "";
+
+        // Hide the modal
+        const bootstrapModal = bootstrap.Modal.getInstance(addRowModal);
+        bootstrapModal.hide();
+
+        // Reinitialize event listeners for edit and delete buttons
+        initializeRowActions();
+      });
+
+      function initializeRowActions() {
+        const editButtons = document.querySelectorAll(".btn-link.btn-primary");
+        const deleteButtons = document.querySelectorAll(".btn-link.btn-danger");
+
+        // Reattach event listeners for edit and delete buttons
+        editButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            currentRow = this.closest("tr");
+            if (!currentRow) {
+              console.error("Row not found!");
+              return;
+            }
+
+            const name = currentRow.querySelector("td:nth-child(1)").textContent.trim();
+            const position = currentRow.querySelector("td:nth-child(2)").textContent.trim();
+            const office = currentRow.querySelector("td:nth-child(3)").textContent.trim();
+
+            // Populate modal inputs
+            editNameInput.value = name;
+            editPositionInput.value = position;
+            editOfficeInput.value = office;
+
+            // Show the modal
+            const bootstrapModal = new bootstrap.Modal(editModal);
+            bootstrapModal.show();
+          });
+        });
+
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const row = this.closest("tr");
+            if (row) {
+              const confirmDelete = confirm("Are you sure you want to delete this row?");
+              if (confirmDelete) {
+                row.remove();
+              }
+            } else {
+              console.error("Row not found!");
+            }
+          });
+        });
+      }
+
+      // Initialize actions for existing rows
+      initializeRowActions();
+
     });
   </script>
 
