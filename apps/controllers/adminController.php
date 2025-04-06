@@ -16,5 +16,10 @@ class AdminController {
         require_once __DIR__ . '/../views/admin/lesson/lesson_list.php';
     }
     
+    public function search() {
+        require_once __DIR__ . '/../views/admin/home/admin_search_advanced.php';
+    }
+
+    
 }
 ?>

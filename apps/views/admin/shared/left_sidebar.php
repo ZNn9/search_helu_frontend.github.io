@@ -30,6 +30,8 @@
       },
     });
   </script>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- CSS Files -->
   <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/bootstrap.min.css" />
@@ -93,6 +95,13 @@
                 <p>Dashboard</p>
               </a>
             </li>
+            <li class="nav-item" >
+              <a href="/search_helu_frontend/admin/search" >
+                <i class="fas fa-home" ></i>
+                <p>Search Advanced</p>
+                <span class=""></span>
+              </a>
+            </li>
             <li class="nav-section">
               <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
@@ -100,34 +109,50 @@
               <h4 class="text-section">Components</h4>
             </li>
             <li class="nav-item">
-              <a data-bs-toggle="collapse" href="#base">
+              <a data-bs-toggle="collapse" href="#base1">
                 <i class="fas fa-layer-group"></i>
                 <p>Account</p>
                 <span class="caret"></span>
               </a>
-              <div class="collapse" id="base">
+              <div class="collapse" id="base1">
                 <ul class="nav nav-collapse">
                   <li>
                     <a href="/search_helu_frontend/admin/listaccount">
                       <span class="sub-item">List Account</span>
                     </a>
                   </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#base2">
+                <i class="fas fa-layer-group"></i>
+                <p>Course</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="base2">
+                <ul class="nav nav-collapse">
                   <li>
                     <a href="/search_helu_frontend/admin/listcourses">
                       <span class="sub-item">List Courses</span>
                     </a>
                   </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#base3">
+                <i class="fas fa-layer-group"></i>
+                <p>Lesson</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="base3">
+                <ul class="nav nav-collapse">
                   <li>
                     <a href="/search_helu_frontend/admin/listlesson">
                       <span class="sub-item">List lesson</span>
                     </a>
                   </li>
-                  
-                  <!-- <li>
-                    <a href="#">
-                      <span class="sub-item">Account ...</span>
-                    </a>
-                  </li> -->
                 </ul>
               </div>
             </li>

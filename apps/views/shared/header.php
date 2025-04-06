@@ -70,8 +70,8 @@ function getUserRoles($accountController)
                     </li>
                 </ul>
                 <div class="nav-item d-flex align-items-center">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search for course" aria-label="Search">
+                    <form class="d-flex" action="/search_helu_frontend/course" method="GET">
+                        <input class="form-control me-2" type="search" name="query" placeholder="Search for course" aria-label="Search">
                         <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
