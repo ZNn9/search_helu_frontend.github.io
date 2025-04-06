@@ -35,6 +35,19 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                     </div>
                   </div>
                   <div class="card-body">
+                    <!-- Dropdown for rows per page -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <div>
+                        <label for="rowsPerPageSelect">Rows per page:</label>
+                        <select id="rowsPerPageSelect" class="form-select form-select-sm w-auto">
+                          <option value="5" selected>5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <!-- Modal -->
                     <div
                       class="modal fade"
@@ -200,6 +213,83 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       const editOfficeInput = document.getElementById("editOffice");
       const saveChangesButton = document.querySelector("#editRowModal .btn-primary");
 
+      const addRowButton = document.getElementById("addRowButton");
+      const addNameInput = document.getElementById("addName");
+      const addPositionInput = document.getElementById("addPosition");
+      const addOfficeInput = document.getElementById("addOffice");
+      const tableBody = document.querySelector("#add-row tbody");
+      const addRowModal = document.getElementById("addRowModal");
+
+      const table = document.getElementById("add-row");
+      const rowsPerPageSelect = document.getElementById("rowsPerPageSelect");
+      let rowsPerPage = parseInt(rowsPerPageSelect.value, 10);
+      let currentPage = 1;
+
+      function paginateTable() {
+        const rows = Array.from(table.querySelectorAll("tbody tr"));
+        const totalRows = rows.length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        // Adjust current page if it exceeds total pages
+        if (currentPage > totalPages) {
+          currentPage = totalPages;
+        }
+
+        // Hide all rows
+        rows.forEach((row, index) => {
+          row.style.display = "none";
+          if (
+            index >= (currentPage - 1) * rowsPerPage &&
+            index < currentPage * rowsPerPage
+          ) {
+            row.style.display = "";
+          }
+        });
+
+        // Update pagination controls
+        updatePaginationControls(totalPages);
+      }
+
+      function updatePaginationControls(totalPages) {
+        let paginationContainer = document.getElementById("pagination-controls");
+        if (!paginationContainer) {
+          paginationContainer = document.createElement("div");
+          paginationContainer.id = "pagination-controls";
+          paginationContainer.className = "pagination-controls mt-3";
+          table.parentElement.appendChild(paginationContainer);
+        }
+
+        paginationContainer.innerHTML = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement("button");
+          pageButton.textContent = i;
+          pageButton.className = "btn btn-sm btn-secondary mx-1";
+          if (i === currentPage) {
+            pageButton.classList.add("btn-primary");
+          }
+          pageButton.addEventListener("click", function () {
+            currentPage = i;
+            paginateTable();
+          });
+          paginationContainer.appendChild(pageButton);
+        }
+      }
+
+      rowsPerPageSelect.addEventListener("change", function () {
+        rowsPerPage = parseInt(this.value, 10); // Update rowsPerPage with the selected value
+        currentPage = 1; // Reset to the first page
+        paginateTable();
+      });
+
+      // Re-paginate whenever a new row is added
+      addRowButton.addEventListener("click", function () {
+        setTimeout(paginateTable, 100); // Delay to ensure the row is added
+      });
+
+      // Initial pagination
+      paginateTable();
+
       let currentRow = null; // To track the row being edited
 
       if (!editModal) {
@@ -248,19 +338,120 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
         bootstrapModal.hide();
       });
 
-      // Handle delete functionality
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-          const row = this.closest("tr");
-          if (row) {
-            // Confirm before deleting
-            const confirmDelete = confirm("Are you sure you want to delete this row?");
-            if (confirmDelete) {
-              row.remove();
+      function attachDeleteEvent() {
+        const deleteButtons = document.querySelectorAll(".btn-link.btn-danger");
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const row = this.closest("tr");
+            if (row) {
+              const confirmDelete = confirm("Are you sure you want to delete this row?");
+              if (confirmDelete) {
+                row.remove();
+                paginateTable(); // Re-paginate after deletion
+              }
+            } else {
+              console.error("Row not found!");
             }
-          } else {
-            console.error("Row not found!");
+          });
+        });
+      }
+
+      // Attach delete event to existing rows
+      attachDeleteEvent();
+
+      // Re-attach delete event to dynamically added rows
+      addRowButton.addEventListener("click", function () {
+        setTimeout(attachDeleteEvent, 100); // Delay to ensure the row is added
+      });
+
+      // Handle add row functionality
+      addRowButton.addEventListener("click", function () {
+        const name = addNameInput.value.trim();
+        const position = addPositionInput.value.trim();
+        const office = addOfficeInput.value.trim();
+
+        if (!name || !position || !office) {
+          alert("Please fill in all fields before adding a row.");
+          return;
+        }
+
+        // Create a new row
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td>${name}</td>
+          <td>${position}</td>
+          <td>${office}</td>
+          <td>
+            <div class="form-button-action">
+              <button
+                type="button"
+                data-bs-toggle="tooltip"
+                title=""
+                class="btn btn-link btn-primary btn-lg"
+                data-original-title="Edit Task"
+              >
+                <i class="fa fa-edit"></i>
+              </button>
+              <button
+                type="button"
+                data-bs-toggle="tooltip"
+                title=""
+                class="btn btn-link btn-danger"
+                data-original-title="Remove"
+              >
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </td>
+        `;
+
+        // Append the new row to the table
+        tableBody.appendChild(newRow);
+
+        // Clear input fields
+        addNameInput.value = "";
+        addPositionInput.value = "";
+        addOfficeInput.value = "";
+
+        // Close the modal
+        const bootstrapModal = bootstrap.Modal.getInstance(addRowModal);
+        bootstrapModal.hide();
+
+        // Add event listeners for the new row's buttons
+        const editButton = newRow.querySelector(".btn-link.btn-primary");
+        const deleteButton = newRow.querySelector(".btn-link.btn-danger");
+
+        editButton.addEventListener("click", function () {
+          currentRow = newRow;
+          const name = newRow.querySelector("td:nth-child(1)").textContent.trim();
+          const position = newRow.querySelector("td:nth-child(2)").textContent.trim();
+          const office = newRow.querySelector("td:nth-child(3)").textContent.trim();
+
+          editNameInput.value = name;
+          editPositionInput.value = position;
+          editOfficeInput.value = office;
+
+          const bootstrapModal = new bootstrap.Modal(editModal);
+          bootstrapModal.show();
+        });
+
+        deleteButton.addEventListener("click", function () {
+          // const confirmDelete = confirm("Are you sure you want to delete this row?");
+          if (confirmDelete) {
+            newRow.remove();
+            paginateTable(); // Re-paginate after deletion
           }
+        });
+
+        paginateTable(); // Re-paginate after adding a new row
+      });
+
+      // Fix "Close" button functionality for the add row modal
+      const closeButtons = document.querySelectorAll('[data-dismiss="modal"]');
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const bootstrapModal = bootstrap.Modal.getInstance(addRowModal);
+          bootstrapModal.hide();
         });
       });
     });
