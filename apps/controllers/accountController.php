@@ -86,4 +86,10 @@ class AccountController
         $userInfo = $this->getUserInfo();
         return $userInfo['accountName'] ?? 'User';
     }
+
+    public function getAccountId()
+    {
+        $userInfo = $this->getUserInfo();
+        return $userInfo['sub'] ?? 'unknown';
+    }
 }
