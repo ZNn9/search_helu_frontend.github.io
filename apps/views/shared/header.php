@@ -1,3 +1,20 @@
+<?php
+require_once __DIR__ . '/../../controllers/accountController.php';
+$accountController = new AccountController(); // Khởi tạo đối tượng AccountController
+
+// Hàm lấy tên tài khoản từ AccountController
+function getAccountName($accountController)
+{
+    return $accountController->getAccountName();
+}
+
+// Hàm lấy danh sách role từ AccountController
+function getUserRoles($accountController)
+{
+    return $accountController->getUserRoles();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +43,6 @@
         body {
             padding-top: 56px;
         }
-
-        /* Chiều cao navbar mặc định là 56px */
     </style>
 </head>
 
@@ -60,7 +75,34 @@
                         <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
-                <a class="btn btn-primary ms-3" href="/search_helu_frontend/account/login">Login</a>
+                <?php if ($accountController->isLoggedIn()): ?>
+                    <div class="dropdown ms-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php echo htmlspecialchars(getAccountName($accountController)); ?>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li class="dropdown-item">
+                                <div>
+                                    <?php
+                                    $roles = getUserRoles($accountController);
+                                    if (is_array($roles) && !empty($roles)): ?>
+                                        <?php foreach ($roles as $role): ?>
+                                            <span class="badge bg-secondary me-1"><?php echo htmlspecialchars($role); ?></span>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <span class="text-muted">No roles available</span>
+                                    <?php endif; ?>
+                                </div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/search_helu_frontend/account/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <a class="btn btn-primary ms-3" href="/search_helu_frontend/account/login">Login</a>
+                <?php endif; ?>
             </div>
         </div>
     </nav>

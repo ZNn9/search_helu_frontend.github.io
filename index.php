@@ -6,7 +6,8 @@ define('BASE_PATH', __DIR__);
 define('APP_PATH', BASE_PATH . '/apps');
 
 // Hàm tự động nạp các file model
-function autoload($className) {
+function autoload($className)
+{
     $file = APP_PATH . '/models/' . $className . '.php';
     if (file_exists($file)) {
         require_once $file;
@@ -31,6 +32,21 @@ $isApi = false;
 if (strpos($path, 'api/') === 0) {
     $isApi = true;
     $path = substr($path, 4); // Loại bỏ 'api/' khỏi đường dẫn
+}
+
+if (isset($_GET['token'])) {
+    // Lấy token từ URL
+    $token = $_GET['token'];
+
+    // Lưu token vào cookie
+    setcookie('token', $token, time() + 3600, '/', '', false, true); // Cookie tồn tại trong 1 giờ
+
+    // Debug: Kiểm tra token
+    error_log('Token đã được lưu vào cookie: ' . $token);
+
+    // Chuyển hướng về trang home mà không có tham số token
+    header('Location: /search_helu_frontend/home');
+    exit;
 }
 
 // Xử lý đường dẫn sau khi loại bỏ tiền tố (nếu có)
@@ -101,7 +117,7 @@ if (file_exists($controllerFile)) {
     // Fallback về HomeController
     require_once APP_PATH . '/controllers/homeController.php';
     $controllerObj = new HomeController();
-    
+
     if ($isApi) {
         header('Content-Type: application/json');
         echo json_encode(['message' => 'Trang index mặc định từ API']);
@@ -109,4 +125,3 @@ if (file_exists($controllerFile)) {
         $controllerObj->index();
     }
 }
-?>
