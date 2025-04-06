@@ -6,7 +6,8 @@ define('BASE_PATH', __DIR__);
 define('APP_PATH', BASE_PATH . '/apps');
 
 // Hàm tự động nạp các file model
-function autoload($className) {
+function autoload($className)
+{
     $file = APP_PATH . '/models/' . $className . '.php';
     if (file_exists($file)) {
         require_once $file;
@@ -33,6 +34,39 @@ if (strpos($path, 'api/') === 0) {
     $path = substr($path, 4); // Loại bỏ 'api/' khỏi đường dẫn
 }
 
+// Kiểm tra nếu URL chứa callback từ Google Auth
+if (strpos($path, 'auth/google/callback') !== false && isset($_GET['code'])) {
+    // Lấy mã code từ URL
+    $code = $_GET['code'];
+
+    // Gửi yêu cầu đến API để lấy token
+    $ch = curl_init('http://127.0.0.1:8000/api/auth/google/callback?code=' . urlencode($code));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    // Chuyển đổi phản hồi thành JSON
+    $data = json_decode($response, true);
+
+    // Kiểm tra nếu API trả về token
+    if (isset($data['token'])) {
+        // Lưu token vào cookie
+        setcookie('token', $data['token'], time() + 3600, '/', '', false, true); // Cookie tồn tại trong 1 giờ
+
+        // Debug: Kiểm tra token
+        error_log('Token đã được lưu vào cookie: ' . $data['token']);
+
+        // Chuyển hướng về trang home
+        header('Location: /search_helu_frontend/home');
+        exit;
+    } else {
+        // Nếu không có token, chuyển hướng về trang login
+        error_log('Không nhận được token từ API, chuyển hướng về trang login.');
+        header('Location: /search_helu_frontend/account/login');
+        exit;
+    }
+}
+
 // Xử lý đường dẫn sau khi loại bỏ tiền tố (nếu có)
 if (!empty($path)) {
     $parts = explode('/', $path);
@@ -53,7 +87,6 @@ if (!empty($path)) {
     // Lấy danh sách tham số còn lại
     $params = array_slice($parts, 2);
 }
-
 // Xây dựng đường dẫn file controller
 $controllerFile = APP_PATH . '/controllers/' . strtolower($controller) . 'Controller.php';
 
@@ -101,7 +134,7 @@ if (file_exists($controllerFile)) {
     // Fallback về HomeController
     require_once APP_PATH . '/controllers/homeController.php';
     $controllerObj = new HomeController();
-    
+
     if ($isApi) {
         header('Content-Type: application/json');
         echo json_encode(['message' => 'Trang index mặc định từ API']);
@@ -109,4 +142,3 @@ if (file_exists($controllerFile)) {
         $controllerObj->index();
     }
 }
-?>
