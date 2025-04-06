@@ -21,12 +21,21 @@ include __DIR__ . '/../shared/header.php';
     </tbody>
   </table>
 
-  <!-- Phân trang -->
+  <!-- Phân trang ----------------------------------------------------------------->
   <nav>
+    <style>
+    .pagination .page-item.active .page-link {
+        font-weight: bold;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    </style>
     <ul class="pagination justify-content-center" id="pagination">
       <!-- Nút trang sẽ được tạo bằng JS -->
     </ul>
   </nav>
+   <!------------------------------------------------------------------------------>
 </div>
 
 <!-- Modal Thêm -->
