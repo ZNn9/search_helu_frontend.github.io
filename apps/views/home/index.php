@@ -48,7 +48,7 @@
             for ($i = $startCourse + 1; $i <= $endCourse; $i++) { ?>
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-3">
-                        <img src="course1.jpg" class="card-img-top rounded-top" alt="Course 1" style="height: 180px; object-fit: cover;">
+                        <img src="assets/images/study.png" class="card-img-top rounded-top" alt="Course 1" style="height: 180px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Create An LMS Website With LearnPress</h5>
                             <p class="card-text"><small class="text-muted">by Determined Poltras</small></p>
@@ -67,7 +67,7 @@
                             <div class="mt-2">
                                 <button class="btn btn-outline-primary btn-sm me-2 btn-favorite" data-course="course<?= $i ?>"><i class="bi bi-heart"></i></button>
                                 <button class="btn btn-outline-warning btn-sm ms-2 btn-save" data-course="course<?= $i ?>"><i class="bi bi-bookmark"></i></button>
-                                <a href="#" class="btn btn-primary btn-sm ms-2">View More</a>
+                                <a href="/search_helu_frontend/course/show/1" class="btn btn-primary btn-sm ms-2">View More</a>
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
             for ($i = 1; $i <= 3; $i++) {
                 echo "<div class='col'>
                     <div class='card'>
-                        <img src='https://via.placeholder.com/300x200' class='card-img-top' alt='Article Image'>
+                        <img src='assets/images/study.png' class='card-img-top' alt='Article Image' style='width: 400px; height: 300px;'>
                         <div class='card-body'>
                             <h5 class='card-title'>Best LearnPress WordPress Themes</h5>
                             <p class='card-text'>Looking for an amazing & well-functional LearnPress...</p>
