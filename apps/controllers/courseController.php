@@ -33,6 +33,13 @@ class CourseController
         require_once __DIR__ . '/../views/course/course_list.php';
     }
 
+    public function getToken()
+    {
+        // Lấy token từ cookie
+        $token = $_COOKIE['token'] ?? '';
+        
+        return $token;
+    }
     private function callApiWithTokenParams($url, $params, $token)
     {
         // Thêm tham số tìm kiếm vào URL

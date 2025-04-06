@@ -31,7 +31,6 @@
     });
   </script>
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- CSS Files -->
   <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/bootstrap.min.css" />

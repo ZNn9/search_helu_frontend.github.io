@@ -29,7 +29,7 @@
       </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <!--   Core JS Files   -->
 <script src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/js/core/jquery-3.7.1.min.js"></script>
 <script src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/js/core/popper.min.js"></script>
