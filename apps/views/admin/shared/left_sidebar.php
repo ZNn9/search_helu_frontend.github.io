@@ -99,35 +99,42 @@
               </span>
               <h4 class="text-section">Components</h4>
             </li>
+            <?php
+            // Xác định path hiện tại
+            $currentPath = $_SERVER['REQUEST_URI'];
+
+            // Kiểm tra từng trang con
+            $isLesson = strpos($currentPath, 'listlesson') !== false;
+            $isCourses = strpos($currentPath, 'listcourses') !== false;
+            $isAccount = strpos($currentPath, 'listaccount') !== false;
+
+            // Nếu đang ở trang con nào đó thì mở menu cha "Account"
+            $isAccountSection = $isLesson || $isCourses || $isAccount;
+            ?>
+
             <li class="nav-item">
-              <a data-bs-toggle="collapse" href="#base">
+              <a data-bs-toggle="collapse" href="#base" <?php if ($isAccountSection) echo 'aria-expanded="true"'; ?>>
                 <i class="fas fa-layer-group"></i>
                 <p>Account</p>
                 <span class="caret"></span>
               </a>
-              <div class="collapse" id="base">
+              <div class="collapse <?php echo $isAccountSection ? 'show' : ''; ?>" id="base">
                 <ul class="nav nav-collapse">
                   <li>
-                    <a href="/search_helu_frontend/admin/listaccount">
+                    <a href="/search_helu_frontend/admin/listaccount" class="<?php echo $isAccount ? 'active' : ''; ?>">
                       <span class="sub-item">List Account</span>
                     </a>
                   </li>
                   <li>
-                    <a href="/search_helu_frontend/admin/listcourses">
+                    <a href="/search_helu_frontend/admin/listcourses" class="<?php echo $isCourses ? 'active' : ''; ?>">
                       <span class="sub-item">List Courses</span>
                     </a>
                   </li>
                   <li>
-                    <a href="/search_helu_frontend/admin/listlesson">
+                    <a href="/search_helu_frontend/admin/listlesson" class="<?php echo $isLesson ? 'active' : ''; ?>">
                       <span class="sub-item">List lesson</span>
                     </a>
                   </li>
-                  
-                  <!-- <li>
-                    <a href="#">
-                      <span class="sub-item">Account ...</span>
-                    </a>
-                  </li> -->
                 </ul>
               </div>
             </li>
@@ -167,4 +174,3 @@
         <!-- End Navbar -->
       </div>
 </body>
-
