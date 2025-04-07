@@ -64,9 +64,14 @@ include __DIR__ . '/../shared/header.php';
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
+        <input type="hidden" id="editCourseId">
         <input id="editCourseName" class="form-control mb-2" placeholder="Tên khoá học">
         <textarea id="editCourseDesc" class="form-control mb-2" placeholder="Mô tả"></textarea>
-        <input type="hidden" id="editCourseId">
+        <select id="editAccountSelect" class="form-select mb-2"></select>
+        <select id="editIndustrySelect" class="form-select mb-2"></select>
+        <select id="editPrioritySelect" class="form-select mb-2"></select>
+        <select id="editCopyrightSelect" class="form-select mb-2"></select>
+        <select id="editStatusSelect" class="form-select mb-2"></select>
       </div>
       <div class="modal-footer">
         <button class="btn btn-success" onclick="updateCourse()">Lưu</button>
@@ -80,6 +85,9 @@ include __DIR__ . '/../shared/header.php';
 
 <script>
   const API_BASE = "http://127.0.0.1:8000/api/courses";
+  let courses = [];
+  let currentPage = 1;
+  const pageSize = 5;
 
   document.addEventListener("DOMContentLoaded", () => {
     loadCourses();
@@ -92,44 +100,44 @@ include __DIR__ . '/../shared/header.php';
     loadSelect("prioritytypes", "prioritySelect", "idPriorityType", "namePriorityType");
     loadSelect("copyrighttypes", "copyrightSelect", "idCopyrightType", "nameCopyrightType");
     loadSelect("statustypes", "statusSelect", "idStatusType", "nameStatusType");
+
+    // Load dropdowns for edit modal
+    loadSelect("accounts", "editAccountSelect", "idAccount", "accountName");
+    loadSelect("industrytypes", "editIndustrySelect", "idIndustryType", "nameIndustryType");
+    loadSelect("prioritytypes", "editPrioritySelect", "idPriorityType", "namePriorityType");
+    loadSelect("copyrighttypes", "editCopyrightSelect", "idCopyrightType", "nameCopyrightType");
+    loadSelect("statustypes", "editStatusSelect", "idStatusType", "nameStatusType");
   }
 
-  function loadSelect(endpoint, selectId, valueField, textField) {
-    fetch(`http://127.0.0.1:8000/api/${endpoint}`)
-      .then(res => res.json())
-      .then(data => {
-        const select = document.getElementById(selectId);
-        select.innerHTML = "";
-        data.data.forEach(item => {
-          const option = document.createElement("option");
-          option.value = item[valueField];
-          option.textContent = item[textField];
-          select.appendChild(option);
-        });
+  async function loadSelect(endpoint, selectId, valueField, textField) {
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/api/${endpoint}`);
+      const data = await res.json();
+      const select = document.getElementById(selectId);
+      select.innerHTML = "";
+      data.data.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item[valueField];
+        option.textContent = item[textField];
+        select.appendChild(option);
       });
+    } catch (error) {
+      console.error(`Error loading ${endpoint}:`, error);
+      alert(`Không thể tải danh sách ${endpoint}!`);
+    }
   }
 
-  function loadCourses() {
-    fetch(API_BASE)
-      .then(res => res.json())
-      .then(data => {
-        const tbody = document.querySelector("#courseTable tbody");
-        tbody.innerHTML = "";
-        data.data.forEach(course => {
-          const row = `
-            <tr>
-              <td>${course.courseName}</td>
-              <td>${course.description}</td>
-              <td>${course.timeCreated}</td>
-              <td>
-                <button class="btn btn-sm btn-warning" onclick='showEdit(${JSON.stringify(course)})'>Sửa</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteCourse(${course.idCourse})">Xoá</button>
-              </td>
-            </tr>
-          `;
-          tbody.innerHTML += row;
-        });
-      });
+  async function loadCourses() {
+    try {
+      const res = await fetch(API_BASE);
+      const data = await res.json();
+      courses = data.data; // Lưu dữ liệu vào biến toàn cục
+      renderTable();
+      renderPagination();
+    } catch (error) {
+      console.error("Error loading courses:", error);
+      alert("Không thể tải danh sách khoá học!");
+    }
   }
 
   function renderTable() {
@@ -172,19 +180,31 @@ include __DIR__ . '/../shared/header.php';
       });
       pagination.appendChild(li);
     }
+
+    // Ensure the last page is displayed correctly
+    if (courses.length % pageSize !== 0 && currentPage > totalPages) {
+      currentPage = totalPages;
+      renderTable();
+      renderPagination();
+    }
   }
 
-  function addCourse() {
+  async function addCourse() {
     const name = document.getElementById("courseName").value;
     const desc = document.getElementById("courseDesc").value;
-
     const idAccount = document.getElementById("accountSelect").value;
     const idIndustryType = document.getElementById("industrySelect").value;
     const idPriorityType = document.getElementById("prioritySelect").value;
     const idCopyrightType = document.getElementById("copyrightSelect").value;
     const idStatusType = document.getElementById("statusSelect").value;
 
-    fetch(API_BASE, {
+    if (!name || !desc) {
+      alert("Vui lòng điền đầy đủ tên và mô tả!");
+      return;
+    }
+
+    try {
+      const res = await fetch(API_BASE, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -198,63 +218,132 @@ include __DIR__ . '/../shared/header.php';
           courseName: name,
           description: desc
         })
-      })
-      .then(res => res.json())
-      .then(() => {
+      });
+
+      const data = await res.json();
+
+      if (res.status === 201 || res.status === 200) {
         alert("Thêm thành công!");
         document.getElementById("courseName").value = "";
         document.getElementById("courseDesc").value = "";
-        bootstrap.Modal.getInstance(document.getElementById("addModal")).hide();
-        loadCourses();
-      });
+        const addModal = new bootstrap.Modal(document.getElementById("addModal"));
+        addModal.hide();
+
+        // Reload the page after adding a course
+        location.reload();
+      } else {
+        alert("Thêm thất bại: " + (data.message || "Lỗi không xác định"));
+      }
+    } catch (error) {
+      console.error("Error adding course:", error);
+      alert("Đã có lỗi xảy ra khi thêm khoá học!");
+    }
   }
 
-  function deleteCourse(id) {
+  async function deleteCourse(id) {
     if (!confirm("Bạn có chắc muốn xoá?")) return;
-    fetch(`${API_BASE}/${id}`, {
+
+    try {
+      const res = await fetch(`${API_BASE}/${id}`, {
         method: "DELETE"
-      })
-      .then(res => res.json())
-      .then(() => {
-        alert("Xoá thành công!");
-        currentPage = 1;
-        loadCourses();
       });
+
+      const data = await res.json();
+
+      if (res.status === 200 || res.status === 204) {
+        alert("Xoá thành công!");
+        // Xoá khoá học khỏi danh sách cục bộ
+        courses = courses.filter(course => course.idCourse !== id);
+        currentPage = 1; // Reset về trang đầu
+        renderTable();
+        renderPagination();
+      } else {
+        alert("Xoá thất bại: " + (data.message || "Lỗi không xác định"));
+      }
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      alert("Đã có lỗi xảy ra khi xoá khoá học!");
+    }
   }
 
   function showEdit(course) {
     document.getElementById("editCourseId").value = course.idCourse;
     document.getElementById("editCourseName").value = course.courseName;
     document.getElementById("editCourseDesc").value = course.description;
-    bootstrap.Modal.getInstance(document.getElementById("editModal")).show();
+
+    // Set selected values for dropdowns
+    document.getElementById("editAccountSelect").value = course.idAccount;
+    document.getElementById("editIndustrySelect").value = course.idIndustryType;
+    document.getElementById("editPrioritySelect").value = course.idPriorityType;
+    document.getElementById("editCopyrightSelect").value = course.idCopyrightType;
+    document.getElementById("editStatusSelect").value = course.idStatusType;
+
+    const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+    editModal.show();
   }
 
-  function updateCourse() {
-    const id = document.getElementById("editCourseId").value;
-    const name = document.getElementById("editCourseName").value;
-    const desc = document.getElementById("editCourseDesc").value;
+  async function updateCourse() {
+  const id = document.getElementById("editCourseId").value;
+  const name = document.getElementById("editCourseName").value;
+  const desc = document.getElementById("editCourseDesc").value;
+  const idAccount = document.getElementById("editAccountSelect").value;
+  const idIndustryType = document.getElementById("editIndustrySelect").value;
+  const idPriorityType = document.getElementById("editPrioritySelect").value;
+  const idCopyrightType = document.getElementById("editCopyrightSelect").value;
+  const idStatusType = document.getElementById("editStatusSelect").value;
 
-    // Dùng lại dropdown chọn mặc định account đầu tiên (id = 6) như yêu cầu trước
-    fetch(`${API_BASE}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          idAccount: 6,
-          idIndustryType: 1,
-          idPriorityType: 1,
-          idCopyrightType: 1,
-          idStatusType: 1,
-          courseName: name,
-          description: desc
-        })
+  if (!name || !desc) {
+    alert("Vui lòng điền đầy đủ tên và mô tả!");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        idAccount,
+        idIndustryType,
+        idPriorityType,
+        idCopyrightType,
+        idStatusType,
+        courseName: name,
+        description: desc
       })
-      .then(res => res.json())
-      .then(() => {
-        alert("Cập nhật thành công!");
-        bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
-        loadCourses();
-      });
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      alert("Cập nhật thành công!");
+      const editModalElement = document.getElementById("editModal");
+      const editModal = bootstrap.Modal.getInstance(editModalElement) || new bootstrap.Modal(editModalElement);
+      editModal.hide();
+
+      // Cập nhật khoá học trong danh sách cục bộ
+      const courseIndex = courses.findIndex(course => course.idCourse === parseInt(id));
+      if (courseIndex !== -1) {
+        courses[courseIndex] = {
+          ...courses[courseIndex],
+          courseName: name,
+          description: desc,
+          idAccount,
+          idIndustryType,
+          idPriorityType,
+          idCopyrightType,
+          idStatusType
+        };
+      }
+      renderTable();
+      renderPagination();
+    } else {
+      alert("Cập nhật thất bại: " + (data.message || "Lỗi không xác định"));
+    }
+  } catch (error) {
+    console.error("Error updating course:", error);
+    alert("Đã có lỗi xảy ra khi cập nhật khoá học!");
   }
+}
 </script>
