@@ -66,32 +66,55 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group form-group-default">
-                                <label>Name</label>
+                                <label>Lesson Name</label>
                                 <input
-                                  id="addName"
+                                  id="lessonName"
                                   type="text"
                                   class="form-control"
-                                  placeholder="fill name" />
+                                  placeholder="Lesson Name" />
                               </div>
                             </div>
-                            <div class="col-md-6 pe-0">
+                            <div class="col-sm-12">
                               <div class="form-group form-group-default">
-                                <label>Position</label>
+                                <label>Video Address</label>
                                 <input
-                                  id="addPosition"
+                                  id="videoAddress"
                                   type="text"
                                   class="form-control"
-                                  placeholder="fill position" />
+                                  placeholder="Video URL" />
                               </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12">
                               <div class="form-group form-group-default">
-                                <label>Office</label>
-                                <input
-                                  id="addOffice"
-                                  type="text"
+                                <label>Description</label>
+                                <textarea
+                                  id="description"
                                   class="form-control"
-                                  placeholder="fill office" />
+                                  placeholder="Description"></textarea>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group form-group-default">
+                                <label>Course</label>
+                                <select id="idCourse" class="form-control">
+                                  <!-- Options will be populated via JS -->
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group form-group-default">
+                                <label>Copyright Type</label>
+                                <select id="idCopyrightType" class="form-control">
+                                  <!-- Options will be populated via JS -->
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group form-group-default">
+                                <label>Status Type</label>
+                                <select id="idStatusType" class="form-control">
+                                  <!-- Options will be populated via JS -->
+                                </select>
                               </div>
                             </div>
                           </div>
@@ -121,28 +144,24 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                     class="display table table-striped table-hover">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th style="width: 10%">Action</th>
+                        <th>Lesson Name</th>
+                        <th>Video Address</th>
+                        <th>Description</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
+                        <th>Lesson Name</th>
+                        <th>Video Address</th>
+                        <th>Description</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
-                    <tbody id="tableBody">
-                      <!-- Rows will be inserted here via JS -->
+                    <tbody>
+                      <!-- Data will be inserted here by JavaScript -->
                     </tbody>
                   </table>
-                </div>
-                <!-- Pagination -->
-                <div id="pagination" class="d-flex justify-content-center">
-                  <!-- Pagination links will be dynamically inserted here -->
                 </div>
               </div>
             </div>
@@ -150,6 +169,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
         </div>
       </div>
     </div>
+
     <!-- Debugging: Check if footer.php exists -->
     <?php
     if (!file_exists(__DIR__ . '/../shared/footer.php')) {
@@ -163,57 +183,117 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const tableBody = document.getElementById("tableBody");
-      const pagination = document.getElementById("pagination");
-      let currentPage = 1;
-      const perPage = 1;
+      // Load dropdowns for Course, Copyright Type, and Status Type
+      loadSelect("http://127.0.0.1:8000/api/courses", "idCourse", "idCourse", "courseName");
+      loadSelect("http://127.0.0.1:8000/api/copyrighttypes", "idCopyrightType", "idCopyrightType", "nameCopyrightType");
+      loadSelect("http://127.0.0.1:8000/api/statustypes", "idStatusType", "idStatusType", "nameStatusType");
 
-      function fetchData(page = 1) {
-        fetch(`http://127.0.0.1:8000/api/lessons?per_page=${perPage}&page=${page}`)
-          .then((response) => response.json())
-          .then((data) => {
-            const rows = data.data;
-            const total = data.total;
-            const lastPage = data.last_page;
-
-            // Clear the table body before inserting new rows
-            tableBody.innerHTML = '';
-
-            rows.forEach((row) => {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                <td>${row.name}</td>
-                <td>${row.position}</td>
-                <td>${row.office}</td>
-                <td>
-                  <button class="btn btn-primary">Edit</button>
-                  <button class="btn btn-danger">Delete</button>
-                </td>
-              `;
-              tableBody.appendChild(tr);
+      function loadSelect(url, selectId, valueField, textField) {
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            const select = document.getElementById(selectId);
+            select.innerHTML = "";
+            data.data.forEach(item => {
+              const opt = document.createElement("option");
+              opt.value = item[valueField];
+              opt.text = item[textField];
+              select.appendChild(opt);
             });
-
-            // Handle pagination
-            pagination.innerHTML = '';
-            for (let i = 1; i <= lastPage; i++) {
-              const pageLink = document.createElement('a');
-              pageLink.href = '#';
-              pageLink.textContent = i;
-              pageLink.classList.add('page-link');
-              pageLink.classList.toggle('active', i === page);
-              pageLink.addEventListener('click', () => {
-                currentPage = i;
-                fetchData(i);
-              });
-              pagination.appendChild(pageLink);
-            }
           })
-          .catch((error) => console.error('Error fetching data:', error));
+          .catch(err => console.error("Failed to load " + selectId, err));
       }
 
-      // Initial data fetch
-      fetchData(currentPage);
+      // Add new lesson
+      document.getElementById("addRowButton").addEventListener("click", function() {
+        const lessonData = {
+          idCourse: parseInt(document.getElementById("idCourse").value),
+          idCopyrightType: parseInt(document.getElementById("idCopyrightType").value),
+          idStatusType: parseInt(document.getElementById("idStatusType").value),
+          lessonName: document.getElementById("lessonName").value,
+          videoAddress: document.getElementById("videoAddress").value,
+          description: document.getElementById("description").value,
+          quantityView: 0,
+          quantityComment: 0,
+          quantityFavorite: 0,
+          quantityShared: 0,
+          quantitySaved: 0
+        };
+
+        fetch("http://127.0.0.1:8000/api/lessons", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(lessonData),
+          })
+          .then((res) => res.json())
+          .then((data) => {
+            alert("Lesson created successfully!");
+
+            // Refresh the table after adding a new lesson
+            loadLessons();
+
+            // Close modal
+            $('#addRowModal').modal('hide');
+          })
+          .catch((err) => {
+            console.error("Failed to create lesson", err);
+            alert("Failed to create lesson.");
+          });
+      });
+
+      // Load lessons into table
+      function loadLessons() {
+        fetch("http://127.0.0.1:8000/api/lessons")
+          .then((res) => res.json())
+          .then((data) => {
+            const tableBody = document.querySelector("table tbody");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            data.data.forEach((lesson) => {
+              const row = document.createElement("tr");
+
+              row.innerHTML = `
+            <td>${lesson.lessonName}</td>
+            <td>${lesson.videoAddress}</td>
+            <td>${lesson.description}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" onclick="editLesson(${lesson.id})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteLesson(${lesson.id})">Delete</button>
+            </td>
+          `;
+              tableBody.appendChild(row);
+            });
+          })
+          .catch((err) => console.error("Failed to load lessons", err));
+      }
+
+      // Initial load of lessons
+      loadLessons();
     });
+
+    function deleteLesson(id) {
+      if (confirm("Are you sure you want to delete this lesson?")) {
+        fetch(`http://127.0.0.1:8000/api/lessons/${id}`, {
+            method: "DELETE"
+          })
+          .then((res) => res.json())
+          .then(() => {
+            alert("Lesson deleted successfully.");
+            loadLessons(); // Reload lessons after deletion
+          })
+          .catch((err) => {
+            console.error("Failed to delete lesson", err);
+            alert("Failed to delete lesson.");
+          });
+      }
+    }
+
+    function editLesson(id) {
+      // Your edit logic goes here
+      alert("Edit feature is not yet implemented.");
+    }
   </script>
 
 </body>
