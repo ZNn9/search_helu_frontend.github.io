@@ -1,22 +1,25 @@
-<?php 
+<?php
 // Debugging: Check if the file exists before including
 if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
-    echo "Error: left_sidebar.php not found!";
+  echo "Error: left_sidebar.php not found!";
 } else {
-    include __DIR__ . '/../shared/left_sidebar.php';
+  include __DIR__ . '/../shared/left_sidebar.php';
 }
 ?>
-  <body>
-    <div class="wrapper">
-        <div class="container">
-        <!-- Debugging: Check if header.php exists -->
-        <?php 
-              if (!file_exists(__DIR__ . '/../shared/header.php')) {
-                  echo "Error: header.php not found!";
-              } else {
-                  include __DIR__ . '/../shared/header.php';
-              }
-        ?>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <!-- Debugging: Check if header.php exists -->
+      <?php
+      if (!file_exists(__DIR__ . '/../shared/header.php')) {
+        echo "Error: header.php not found!";
+      } else {
+        include __DIR__ . '/../shared/header.php';
+      }
+      ?>
+      <main class="flex-1 p-4 space-y-8">
+        <main class="flex-1 p-4 space-y-8">
           <div class="page-inner">
             <div class="row">
               <div class="col-md-12">
@@ -27,8 +30,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                       <button
                         class="btn btn-primary btn-round ms-auto"
                         data-bs-toggle="modal"
-                        data-bs-target="#addRowModal"
-                      >
+                        data-bs-target="#addRowModal">
                         <i class="fa fa-plus"></i>
                         Add Row
                       </button>
@@ -54,8 +56,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                       id="addRowModal"
                       tabindex="-1"
                       role="dialog"
-                      aria-hidden="true"
-                    >
+                      aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header border-0">
@@ -67,8 +68,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                               type="button"
                               class="close"
                               data-dismiss="modal"
-                              aria-label="Close"
-                            >
+                              aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
@@ -86,8 +86,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                                       id="addName"
                                       type="text"
                                       class="form-control"
-                                      placeholder="fill name"
-                                    />
+                                      placeholder="fill name" />
                                   </div>
                                 </div>
                                 <div class="col-md-6 pe-0">
@@ -97,8 +96,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                                       id="addPosition"
                                       type="text"
                                       class="form-control"
-                                      placeholder="fill position"
-                                    />
+                                      placeholder="fill position" />
                                   </div>
                                 </div>
                                 <div class="col-md-6">
@@ -108,8 +106,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                                       id="addOffice"
                                       type="text"
                                       class="form-control"
-                                      placeholder="fill office"
-                                    />
+                                      placeholder="fill office" />
                                   </div>
                                 </div>
                               </div>
@@ -119,15 +116,13 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                             <button
                               type="button"
                               id="addRowButton"
-                              class="btn btn-primary"
-                            >
+                              class="btn btn-primary">
                               Add
                             </button>
                             <button
                               type="button"
                               class="btn btn-danger"
-                              data-dismiss="modal"
-                            >
+                              data-dismiss="modal">
                               Close
                             </button>
                           </div>
@@ -138,8 +133,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                     <div class="table-responsive">
                       <table
                         id="add-row"
-                        class="display table table-striped table-hover"
-                      >
+                        class="display table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Name</th>
@@ -168,8 +162,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                                   data-bs-toggle="tooltip"
                                   title=""
                                   class="btn btn-link btn-primary btn-lg"
-                                  data-original-title="Edit Task"
-                                >
+                                  data-original-title="Edit Task">
                                   <i class="fa fa-edit"></i>
                                 </button>
                                 <button
@@ -177,8 +170,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                                   data-bs-toggle="tooltip"
                                   title=""
                                   class="btn btn-link btn-danger"
-                                  data-original-title="Remove"
-                                >
+                                  data-original-title="Remove">
                                   <i class="fa fa-times"></i>
                                 </button>
                               </div>
@@ -192,19 +184,19 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
               </div>
             </div>
           </div>
-          </div>
-      <!-- Debugging: Check if footer.php exists -->
-      <?php 
-      if (!file_exists(__DIR__ . '/../shared/footer.php')) {
-          echo "Error: footer.php not found!";
-      } else {
-          include __DIR__ . '/../shared/footer.php';
-      }
-      ?>
     </div>
+    <!-- Debugging: Check if footer.php exists -->
+    <?php
+    if (!file_exists(__DIR__ . '/../shared/footer.php')) {
+      echo "Error: footer.php not found!";
+    } else {
+      include __DIR__ . '/../shared/footer.php';
+    }
+    ?>
+  </div>
   </div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       const editButtons = document.querySelectorAll(".btn-link.btn-primary");
       const deleteButtons = document.querySelectorAll(".btn-link.btn-danger");
       const editModal = document.getElementById("editRowModal");
@@ -268,7 +260,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
           if (i === currentPage) {
             pageButton.classList.add("btn-primary");
           }
-          pageButton.addEventListener("click", function () {
+          pageButton.addEventListener("click", function() {
             currentPage = i;
             paginateTable();
           });
@@ -276,14 +268,14 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
         }
       }
 
-      rowsPerPageSelect.addEventListener("change", function () {
+      rowsPerPageSelect.addEventListener("change", function() {
         rowsPerPage = parseInt(this.value, 10); // Update rowsPerPage with the selected value
         currentPage = 1; // Reset to the first page
         paginateTable();
       });
 
       // Re-paginate whenever a new row is added
-      addRowButton.addEventListener("click", function () {
+      addRowButton.addEventListener("click", function() {
         setTimeout(paginateTable, 100); // Delay to ensure the row is added
       });
 
@@ -299,7 +291,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
 
       // Handle edit functionality
       editButtons.forEach((button) => {
-        button.addEventListener("click", function () {
+        button.addEventListener("click", function() {
           currentRow = this.closest("tr");
           if (!currentRow) {
             console.error("Row not found!");
@@ -322,7 +314,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       });
 
       // Handle save changes functionality
-      saveChangesButton.addEventListener("click", function () {
+      saveChangesButton.addEventListener("click", function() {
         if (!currentRow) {
           console.error("No row selected for editing!");
           return;
@@ -341,7 +333,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       function attachDeleteEvent() {
         const deleteButtons = document.querySelectorAll(".btn-link.btn-danger");
         deleteButtons.forEach((button) => {
-          button.addEventListener("click", function () {
+          button.addEventListener("click", function() {
             const row = this.closest("tr");
             if (row) {
               const confirmDelete = confirm("Are you sure you want to delete this row?");
@@ -360,12 +352,12 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       attachDeleteEvent();
 
       // Re-attach delete event to dynamically added rows
-      addRowButton.addEventListener("click", function () {
+      addRowButton.addEventListener("click", function() {
         setTimeout(attachDeleteEvent, 100); // Delay to ensure the row is added
       });
 
       // Handle add row functionality
-      addRowButton.addEventListener("click", function () {
+      addRowButton.addEventListener("click", function() {
         const name = addNameInput.value.trim();
         const position = addPositionInput.value.trim();
         const office = addOfficeInput.value.trim();
@@ -421,7 +413,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
         const editButton = newRow.querySelector(".btn-link.btn-primary");
         const deleteButton = newRow.querySelector(".btn-link.btn-danger");
 
-        editButton.addEventListener("click", function () {
+        editButton.addEventListener("click", function() {
           currentRow = newRow;
           const name = newRow.querySelector("td:nth-child(1)").textContent.trim();
           const position = newRow.querySelector("td:nth-child(2)").textContent.trim();
@@ -435,7 +427,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
           bootstrapModal.show();
         });
 
-        deleteButton.addEventListener("click", function () {
+        deleteButton.addEventListener("click", function() {
           // const confirmDelete = confirm("Are you sure you want to delete this row?");
           if (confirmDelete) {
             newRow.remove();
@@ -449,7 +441,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
       // Fix "Close" button functionality for the add row modal
       const closeButtons = document.querySelectorAll('[data-dismiss="modal"]');
       closeButtons.forEach((button) => {
-        button.addEventListener("click", function () {
+        button.addEventListener("click", function() {
           const bootstrapModal = bootstrap.Modal.getInstance(addRowModal);
           bootstrapModal.hide();
         });
@@ -463,8 +455,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
     id="editRowModal"
     tabindex="-1"
     role="dialog"
-    aria-hidden="true"
-  >
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header border-0">
@@ -476,8 +467,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
@@ -489,8 +479,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                     id="editName"
                     type="text"
                     class="form-control"
-                    placeholder="Edit name"
-                  />
+                    placeholder="Edit name" />
                 </div>
               </div>
               <div class="col-md-6 pe-0">
@@ -500,8 +489,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                     id="editPosition"
                     type="text"
                     class="form-control"
-                    placeholder="Edit position"
-                  />
+                    placeholder="Edit position" />
                 </div>
               </div>
               <div class="col-md-6">
@@ -511,8 +499,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                     id="editOffice"
                     type="text"
                     class="form-control"
-                    placeholder="Edit office"
-                  />
+                    placeholder="Edit office" />
                 </div>
               </div>
             </div>
@@ -523,8 +510,7 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
           <button
             type="button"
             class="btn btn-danger"
-            data-bs-dismiss="modal"
-          >
+            data-bs-dismiss="modal">
             Close
           </button>
         </div>
@@ -532,5 +518,3 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
     </div>
   </div>
 </body>
-
-

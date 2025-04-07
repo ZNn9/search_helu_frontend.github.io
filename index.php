@@ -37,7 +37,7 @@ if (strpos($path, 'api/') === 0) {
 if (isset($_GET['token'])) {
     // Lấy token từ URL
     $token = $_GET['token'];
-
+    
     // Lưu token vào cookie
     setcookie('token', $token, time() + 3600, '/', '', false, true); // Cookie tồn tại trong 1 giờ
 

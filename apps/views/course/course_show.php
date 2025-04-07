@@ -1,20 +1,8 @@
 <?php include __DIR__ . '/../shared/header.php'; ?>
-
-<!-- Breadcrumb -->
-<nav aria-label="breadcrumb">
-    <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Course</a></li>
-            <li class="breadcrumb-item active" aria-current="page">The Ultimate Guide to The Best WordPress LMS Plugin</li>
-        </ol>
-    </div>
-</nav>
-
 <!-- Main Content -->
 <div class="container my-5">
     <div class="card bg-dark text-white mb-4">
-        <img src="course-banner.jpg" class="card-img" alt="Course Banner" style="height: 200px; object-fit: cover;">
+        <img class="card-img" alt="" style="height: 200px; object-fit: cover;">
         <div class="card-img-overlay d-flex align-items-center justify-content-center">
             <h1 class="text-center">The Ultimate Guide To The Best WordPress LMS Plugin</h1>
         </div>
@@ -212,7 +200,7 @@
         </div>
         <div class="col-md-4">
             <div class="card p-3 text-center">
-                <img src="course-info.jpg" class="card-img-top" alt="Course Info" style="height: 200px; object-fit: cover;">
+                <img  class="card-img-top" alt="" style="height: 200px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">Create an LMS website with LearnPress</h5>
                     <p class="card-text">
