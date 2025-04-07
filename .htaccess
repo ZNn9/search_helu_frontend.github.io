@@ -3,3 +3,5 @@ RewriteBase /search_helu_frontend/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+# Rewrite /course/show/1/lesson to /lesson.php
+RewriteRule ^course/show/([0-9]+)/lesson$ lesson.php [L,QSA]
