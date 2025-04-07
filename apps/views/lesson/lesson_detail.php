@@ -7,6 +7,7 @@ $lessonNumber = isset($_GET['lesson']) ? intval($_GET['lesson']) : 1;
 $videoFile = "/search_helu_frontend/assets/video/Lesson{$lessonNumber}.mp4";
 ?>
 
+
 <div class="container mt-4">
     <div class="row">
         <!-- Video Section -->
@@ -45,7 +46,7 @@ $videoFile = "/search_helu_frontend/assets/video/Lesson{$lessonNumber}.mp4";
 
 <script>
     // Handle chat form submission
-    document.getElementById('chatForm').addEventListener('submit', function (e) {
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const commentBox = document.getElementById('chatbox');
         const commentInput = document.getElementById('comment');

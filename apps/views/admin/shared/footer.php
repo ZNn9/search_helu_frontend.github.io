@@ -28,6 +28,8 @@
         </footer>
       </div>
 </div>
+
+
 <!--   Core JS Files   -->
 <script src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/js/core/jquery-3.7.1.min.js"></script>
 <script src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/js/core/popper.min.js"></script>

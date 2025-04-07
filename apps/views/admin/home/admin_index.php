@@ -1,5 +1,12 @@
+<?php
+// Debugging: Check if the file exists before including
+if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
+    echo "Error: left_sidebar.php not found!";
+} else {
+    include __DIR__ . '/../shared/left_sidebar.php';
+}
+?>
 
-<?php include __DIR__ . '/../shared/left_sidebar.php'; ?>
   <body>
         <div class="container">
           <div class="page-inner">

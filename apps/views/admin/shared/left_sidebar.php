@@ -30,6 +30,7 @@
       },
     });
   </script>
+  <!-- Bootstrap CSS -->
 
   <!-- CSS Files -->
   <link rel="stylesheet" href="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/css/bootstrap.min.css" />
@@ -93,41 +94,77 @@
                 <p>Dashboard</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="/search_helu_frontend/admin/search">
+                <i class="fas fa-home"></i>
+                <p>Search Advanced</p>
+                <span class=""></span>
+              </a>
+            </li>
             <li class="nav-section">
               <span class="sidebar-mini-icon">
                 <i class="fa fa-ellipsis-h"></i>
               </span>
               <h4 class="text-section">Components</h4>
             </li>
+            <?php
+            // Xác định path hiện tại
+            $currentPath = $_SERVER['REQUEST_URI'];
+
+            // Kiểm tra từng trang con
+            $isLesson = strpos($currentPath, 'listlesson') !== false;
+            $isCourses = strpos($currentPath, 'listcourses') !== false;
+            $isAccount = strpos($currentPath, 'listaccount') !== false;
+
+            // Nếu đang ở trang con nào đó thì mở menu cha "Account"
+            $isAccountSection = $isLesson || $isCourses || $isAccount;
+            ?>
+
             <li class="nav-item">
-              <a data-bs-toggle="collapse" href="#base">
+              <a data-bs-toggle="collapse" href="#base1" <?php if ($isAccountSection) echo 'aria-expanded="true"'; ?>>
                 <i class="fas fa-layer-group"></i>
                 <p>Account</p>
                 <span class="caret"></span>
               </a>
-              <div class="collapse" id="base">
+              <div class="collapse <?php echo $isAccountSection ? 'show' : ''; ?>" id="base1">
                 <ul class="nav nav-collapse">
                   <li>
-                    <a href="/search_helu_frontend/admin/listaccount">
+                    <a href="/search_helu_frontend/admin/listaccount" class="<?php echo $isAccount ? 'active' : ''; ?>">
                       <span class="sub-item">List Account</span>
                     </a>
                   </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#base2">
+                <i class="fas fa-layer-group"></i>
+                <p>Course</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="base2">
+                <ul class="nav nav-collapse">
                   <li>
-                    <a href="/search_helu_frontend/admin/listcourses">
+                    <a href="/search_helu_frontend/admin/listcourses" class="<?php echo $isCourses ? 'active' : ''; ?>">
                       <span class="sub-item">List Courses</span>
                     </a>
                   </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#base3">
+                <i class="fas fa-layer-group"></i>
+                <p>Lesson</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="base3">
+                <ul class="nav nav-collapse">
                   <li>
-                    <a href="/search_helu_frontend/admin/listlesson">
+                    <a href="/search_helu_frontend/admin/listlesson" class="<?php echo $isLesson ? 'active' : ''; ?>">
                       <span class="sub-item">List lesson</span>
                     </a>
                   </li>
-                  
-                  <!-- <li>
-                    <a href="#">
-                      <span class="sub-item">Account ...</span>
-                    </a>
-                  </li> -->
                 </ul>
               </div>
             </li>
@@ -167,4 +204,3 @@
         <!-- End Navbar -->
       </div>
 </body>
-
