@@ -27,13 +27,6 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                   <div class="d-flex align-items-center">
                     <h4 class="card-title">Account Table</h4>
                     <div class="ms-auto">
-                      <button
-                        class="btn btn-primary btn-round"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addRowModal">
-                        <i class="fa fa-plus"></i>
-                        Add Row
-                      </button>
                       <button class="btn btn-info btn-round ms-2" id="loadAccountsButton">
                         <i class="fa fa-list"></i> List Account
                       </button>
@@ -53,87 +46,6 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                       </select>
                     </div>
                   </div>
-
-                  <!-- Modal for Add Row -->
-                  <div
-                    class="modal fade"
-                    id="addRowModal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header border-0">
-                          <h5 class="modal-title">
-                            <span class="fw-mediumbold"> New</span>
-                            <span class="fw-light"> Row </span>
-                          </h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <p class="small">
-                            Create a new row using this form, make sure you
-                            fill them all
-                          </p>
-                          <form>
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <div class="form-group form-group-default">
-                                  <label>ID</label>
-                                  <input
-                                    id="addId"
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="fill ID" />
-                                </div>
-                              </div>
-                              <div class="col-sm-12">
-                                <div class="form-group form-group-default">
-                                  <label>Account Name</label>
-                                  <input
-                                    id="addName"
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="fill name" />
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group form-group-default">
-                                  <label>Email</label>
-                                  <input
-                                    id="addEmail"
-                                    type="email"
-                                    class="form-control"
-                                    placeholder="fill email" />
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer border-0">
-                          <button
-                            type="button"
-                            id="addRowButton"
-                            class="btn btn-primary">
-                            Add
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-dismiss="modal">
-                            Close
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
                   <!-- Table -->
                   <div class="table-responsive">
                     <table
@@ -147,14 +59,6 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                           <th style="width: 10%">Action</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                          <th>ID</th>
-                          <th>Account Name</th>
-                          <th>Email</th>
-                          <th>Action</th>
-                        </tr>
-                      </tfoot>
                       <tbody>
                         <!-- Dynamic rows will be inserted here -->
                       </tbody>

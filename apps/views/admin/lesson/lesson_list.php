@@ -150,14 +150,6 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tfoot>
-                      <tr>
-                        <th>Lesson Name</th>
-                        <th>Video Address</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
                     <tbody>
                       <!-- Data will be inserted here by JavaScript -->
                     </tbody>
