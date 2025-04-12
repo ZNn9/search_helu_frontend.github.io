@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../controllers/accountController.php';
+require_once __DIR__ . '/../../helper/sessionHelper.php';
 $accountController = new AccountController(); // Khởi tạo đối tượng AccountController
 
 // Hàm lấy tên tài khoản từ AccountController
@@ -60,7 +61,14 @@ function getUserRoles($accountController)
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/course">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/blog/show/1">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/admin">Dashboard</a></li>
+
+                    // Chỉ hiển thị menu "Dashboard" nếu người dùng có quyền admin
+                    <?php
+                        if (SessionHelper::hasAnyRole(['admin'])) { ?>
+                            <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/admin">Dashboard</a></li>
+                        <?php };
+                    ?>
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">TikTok</a>
                         <ul class="dropdown-menu">

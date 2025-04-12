@@ -14,16 +14,17 @@ class AccountController
     }
 
     // Xử lý đăng xuất
-    public function logout()
-    {
-        // Xóa token khỏi cookie
-        setcookie('token', '', time() - 3600, '/'); // Đặt thời gian hết hạn trong quá khứ
+    public function logout() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-        // Chuyển hướng về trang đăng nhập
-        header('Location: /search_helu_frontend/account/login');
+        session_destroy();
+        setcookie('token', '', time() - 3600, '/'); // Xóa token nếu có
+        header('Location: /search_helu_frontend/login');
         exit;
     }
-
+    
     public function isLoggedIn()
     {
         if (!empty($_COOKIE['token'])) {
@@ -62,13 +63,13 @@ class AccountController
     {
         $userInfo = $this->getUserInfo();
         $roles = $userInfo['roles'] ?? []; // Lấy danh sách roles từ token
-    
+
         // Kiểm tra nếu roles không phải là mảng
         if (!is_array($roles)) {
             // Nếu roles là chuỗi, chuyển thành mảng
             $roles = [$roles];
         }
-    
+
         // Chỉ lấy thuộc tính 'name' của từng role nếu roles là mảng các đối tượng
         $roleNames = array_map(function ($role) {
             if (is_array($role) && isset($role['name'])) {
@@ -76,7 +77,7 @@ class AccountController
             }
             return is_string($role) ? $role : 'Unknown Role';
         }, $roles);
-    
+
         return $roleNames;
     }
 
