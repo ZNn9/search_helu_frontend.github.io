@@ -12,15 +12,15 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
     <div class="container">
       <!-- Debugging: Check if header.php exists -->
       <?php
-      if (!file_exists(__DIR__ . '/../shared/header.php')) {
+      if (!file_exists(__DIR__ . '/shared/header.php')) {
         echo "Error: header.php not found!";
       } else {
-        include __DIR__ . '/../shared/header.php';
+        include __DIR__ . '/shared/header.php';
       }
       ?>
       <div class="page-inner">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12" style="margin-top: 3.0rem;">
             <div class="card">
               <div class="card-header">
                 <div class="d-flex align-items-center">

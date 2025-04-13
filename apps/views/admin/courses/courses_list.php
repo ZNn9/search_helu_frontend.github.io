@@ -1,10 +1,22 @@
 <?php
-include __DIR__ . '/../shared/left_sidebar.php';
-include __DIR__ . '/../shared/header.php';
+// Debugging: Check if the file exists before including
+if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
+  echo "Error: left_sidebar.php not found!";
+} else {
+  include __DIR__ . '/../shared/left_sidebar.php';
+}
 ?>
 
 <div class="container mt-4">
-  <h2>Danh sách khoá học</h2>
+  <!-- Debugging: Check if header.php exists -->
+  <?php
+      if (!file_exists(__DIR__ . '/shared/header.php')) {
+        echo "Error: header.php not found!";
+      } else {
+        include __DIR__ . '/shared/header.php';
+      }
+      ?>
+  <h2 style="margin-top: 3.0rem;">Danh sách khoá học</h2>
   <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">Thêm khoá học</button>
 
   <table class="table table-bordered" id="courseTable">

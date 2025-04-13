@@ -96,16 +96,16 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
     <div class="wrapper">
         <div class="container">
             <?php
-            if (!file_exists(__DIR__ . '/../shared/header.php')) {
+            if (!file_exists(__DIR__ . '/shared/header.php')) {
                 echo "Error: header.php not found!";
             } else {
-                include __DIR__ . '/../shared/header.php';
+                include __DIR__ . '/shared/header.php';
             }
             ?>
 
-            <main class="flex-1 p-4 space-y-8">
+            <main class="flex-1 p-4 space-y-8" style="margin-top: 2rem;">
                 <!-- Advanced Search Button -->
-                <div class="container my-4">
+                <div class="container my-4" >
                     <button id="advanced-search-btn" class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#advanced-search-modal">
                         <i class="bi bi-search"></i> Advanced Search
                     </button>

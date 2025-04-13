@@ -12,10 +12,10 @@ if (!file_exists(__DIR__ . '/../shared/left_sidebar.php')) {
     <div class="container">
       <!-- Debugging: Check if header.php exists -->
       <?php
-      if (!file_exists(__DIR__ . '/../shared/header.php')) {
+      if (!file_exists(__DIR__ . '/shared/header.php')) {
         echo "Error: header.php not found!";
       } else {
-        include __DIR__ . '/../shared/header.php';
+        include __DIR__ . '/shared/header.php';
       }
       ?>
       <main class="flex-1 p-4 space-y-8">
