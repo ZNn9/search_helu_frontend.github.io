@@ -62,7 +62,6 @@ function getUserRoles($accountController)
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/course">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/blog/show/1">Blog</a></li>
 
-                    // Chỉ hiển thị menu "Dashboard" nếu người dùng có quyền admin
                     <?php
                         if (SessionHelper::hasAnyRole(['admin'])) { ?>
                             <li class="nav-item"><a class="nav-link" href="/search_helu_frontend/admin">Dashboard</a></li>

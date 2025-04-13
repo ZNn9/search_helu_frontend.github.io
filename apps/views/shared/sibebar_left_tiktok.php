@@ -3,7 +3,6 @@
     <ul class="mt-4">
         <li><a href="/search_helu_frontend/tiktok" class="block py-2 text-muted-foreground hover:text-primary">Home</a></li>
         <li><a href="#" class="block py-2 text-muted-foreground hover:text-primary">Explore</a></li>
-        <li><a href="/search_helu_frontend/tiktok/advancedsearch" class="block py-2 text-muted-foreground hover:text-primary">Search Advanced</a></li>
         <li><a href="#" class="block py-2 text-muted-foreground hover:text-primary">Following</a></li>
         <li><a href="/search_helu_frontend/tiktok/profile/1" class="block py-2 text-muted-foreground hover:text-primary">Profile</a></li>
         <li><a href="#" class="block py-2 text-muted-foreground hover:text-primary">More</a></li>
