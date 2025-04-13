@@ -1,21 +1,3 @@
-<?php
-// Include file cần thiết, sử dụng __DIR__ để lấy đường dẫn tuyệt đối
-require_once __DIR__ . '/../../../controllers/accountController.php';
-require_once __DIR__ . '/../../../helper/sessionHelper.php';
-
-// Khởi tạo đối tượng AccountController
-$accountController = new AccountController();
-
-// Hàm lấy tên tài khoản từ AccountController
-function getAccountName($accountController) {
-    return $accountController->getAccountName();
-}
-
-// Hàm lấy danh sách role từ AccountController
-function getUserRoles($accountController) {
-    return $accountController->getUserRoles();
-}
-?>
 
 <!-- Navbar Header -->
 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
@@ -227,50 +209,7 @@ function getUserRoles($accountController) {
                     </div>
                 </div>
             </li>
-
-            <?php if ($accountController->isLoggedIn()): ?>
-                <li class="nav-item topbar-user dropdown hidden-caret">
-                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                        <div class="avatar-sm">
-                            <img src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
-                        </div>
-                        <span class="profile-username">
-                            <span class="op-7">Hi,</span>
-                            <span class="fw-bold"><?php echo htmlspecialchars(getAccountName($accountController)); ?></span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user animated fadeIn">
-                        <div class="dropdown-user-scroll scrollbar-outer">
-                            <li>
-                                <div class="user-box">
-                                    <div class="avatar-lg">
-                                        <img src="/search_helu_frontend/assets/kaiadmin-lite-1.2.0/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
-                                    </div>
-                                    <div class="u-text">
-                                        <h4><?php echo htmlspecialchars(getAccountName($accountController)); ?></h4>
-                                        <p class="text-muted">hello@example.com</p> <!-- Có thể thay bằng email thực tế -->
-                                        <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Profile</a>
-                                <a class="dropdown-item" href="#">My Balance</a>
-                                <a class="dropdown-item" href="#">Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/search_helu_frontend/account/logout">Logout</a>
-                            </li>
-                        </div>
-                    </ul>
-                </li>
-            <?php else: ?>
-                <li class="nav-item topbar-icon">
-                    <a class="btn btn-primary ms-3" href="/search_helu_frontend/account/login">Login</a>
-                </li>
-            <?php endif; ?>
+            
         </ul>
     </div>
 </nav>
